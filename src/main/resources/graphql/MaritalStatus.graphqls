@@ -1,0 +1,9 @@
+enum MaritalStatus{
+
+    MARRIED,SINGLE,DIVORCED,WIDOWED
+}
+
+extend type Query {
+maritalStatusList:[MaritalStatus]
+}
+

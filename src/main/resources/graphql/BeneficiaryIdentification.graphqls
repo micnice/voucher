@@ -1,0 +1,35 @@
+type BeneficiaryIdentification{
+    id:ID
+    firstName:String
+    lastName:String
+    maritalStatus:MaritalStatus
+    birthDate:String
+    educationStatus:EducationStatus
+    lmp:String
+    parity:Long
+    identificationNumber:String
+    latitude:String
+    longitude:String
+}
+
+type Query {
+    lMPList(lmp:String):[BeneficiaryIdentification]
+    byIdentificationNumber(identificationNumber:String):BeneficiaryIdentification
+}
+
+input BeneficiaryIdentificationInput{
+    firstName:String
+    lastName:String
+    maritalStatus:MaritalStatus
+    birthDate:String
+    educationStatus:EducationStatus
+    lmp:String
+    parity:Long
+    identificationNumber:String
+    latitude:String
+    longitude:String
+}
+
+type Mutation {
+    createBeneficiaryIdentification(BeneficiaryIdentificationInput:BeneficiaryIdentificationInput):BeneficiaryIdentification
+}
