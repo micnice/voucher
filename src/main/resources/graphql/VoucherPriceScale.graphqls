@@ -1,0 +1,21 @@
+type VoucherPriceScale{
+    id:ID
+    voucherType:VoucherType
+    serviceProvisionLevel:ServiceProvisionLevel
+    priceOfService:BigDecimal
+}
+
+ extend type Query {
+     voucherPriceScaleListByvoucherTypeId(voucherType:ID):[VoucherPriceScale]
+}
+
+input VoucherPriceScaleInput{
+    voucherType:String
+    serviceProvisionLevel:ServiceProvisionLevel
+    priceOfService:BigDecimal
+}
+
+extend type Mutation {
+    createVoucherPriceScale(voucherPriceScaleInput:VoucherPriceScaleInput):VoucherPriceScale
+    updateVoucherPriceScale(voucherPriceScaleInput:VoucherPriceScaleInput,id:ID):VoucherPriceScale
+}

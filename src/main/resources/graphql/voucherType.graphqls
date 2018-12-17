@@ -1,0 +1,19 @@
+type VoucherType{
+    name:String
+    description:String
+}
+
+extend type Query {
+    voucherTypeList:[VoucherType]
+    voucherTypeByName(name:String):VoucherType
+}
+
+input VoucherTypeInput{
+    name:String
+    description:String
+}
+
+extend type Mutation {
+    createVoucherType(voucherTypeInput:VoucherTypeInput):VoucherType
+    updateVoucherType(voucherTypeInput:VoucherTypeInput,id:ID):VoucherType
+}

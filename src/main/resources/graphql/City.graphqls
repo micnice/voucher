@@ -1,0 +1,21 @@
+type City{
+    id:ID
+    name:String
+    description:String
+}
+
+extend type Query {
+    cityList:[City]
+    cityByName(name:String):City
+
+}
+
+input CityInput{
+    name:String
+    description:String
+}
+
+ extend type Mutation {
+     createCity(cityInput:CityInput):City
+     updateCity(cityInput:CityInput,id:ID):City
+}

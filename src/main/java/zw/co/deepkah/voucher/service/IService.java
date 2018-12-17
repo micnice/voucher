@@ -14,4 +14,6 @@ public interface IService<T> {
         void removeById(String Id);
         void remove(T t);
         T save(T t);
+
+
 }

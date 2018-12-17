@@ -1,15 +1,16 @@
 package zw.co.deepkah.voucher.document;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import zw.co.deepkah.voucher.document.BaseId;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public abstract class BaseName extends BaseId {
-
+@Document
+public class ServiceProvider extends BaseId {
     private String name;
     private String description;
+    private City city;
+
+
 }

@@ -1,0 +1,24 @@
+type ServiceProvider{
+    id:ID
+    city:City
+    name:String
+    description:String
+
+}
+
+ extend type Query {
+    serviceProviderList:[ServiceProvider]
+    serviceProviderByName(name:String):ServiceProvider
+}
+
+input ServiceProviderInput{
+    id:ID
+    cityId:ID
+    name:String
+    description:String
+}
+
+extend type Mutation {
+    createServiceProvider(serviceProviderInput:ServiceProviderInput):ServiceProvider
+    updateServiceProvider(serviceProviderInput:ServiceProviderInput,id:ID):ServiceProvider
+}

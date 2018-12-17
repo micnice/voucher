@@ -1,0 +1,8 @@
+enum ServiceProvisionLevel{
+    CLINIC,HOSPITAL,CLINIC_HOSPITAL,OTHER
+}
+
+
+extend type Query {
+    serviceProvisionLevelList:[ServiceProvisionLevel]
+}
