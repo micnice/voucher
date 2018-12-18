@@ -1,0 +1,39 @@
+type PovertyAssessmentTool{
+    id:ID
+    beneficiaryIdentityId:ID
+    pat1:Boolean
+    pat2:Boolean
+    pat3:Boolean
+    pat4:Boolean
+    pat5:Boolean
+    pat6:Boolean
+    pat7:Boolean
+    pat8:Boolean
+    pat9:Boolean
+    pat10:Boolean
+    pat11:Boolean
+}
+
+extend type Query {
+    PovertyAssessmentToolBybeneficiaryIdentityId(beneficiaryIdentityId:ID):PovertyAssessmentTool
+}
+
+input PovertyAssessmentToolInput{
+    beneficiaryIdentityId:ID
+    pat1:Boolean
+    pat2:Boolean
+    pat3:Boolean
+    pat4:Boolean
+    pat5:Boolean
+    pat6:Boolean
+    pat7:Boolean
+    pat8:Boolean
+    pat9:Boolean
+    pat10:Boolean
+    pat11:Boolean
+}
+
+extend type Mutation {
+createPovertyAssessmentTool(povertyAssessmentToolInput:PovertyAssessmentToolInput):PovertyAssessmentTool
+    updatePovertyAssessmentTool(povertyAssessmentToolInput:PovertyAssessmentToolInput,id:ID):PovertyAssessmentTool
+}
