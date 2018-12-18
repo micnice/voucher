@@ -27,6 +27,11 @@ public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentif
     }
 
     @Override
+    public List<BeneficiaryIdentification> trackBeneficiary(String identificationNumber, String firstName, String lastName) {
+        return beneficiaryIdentificationRepository.findByIdentificationNumberLikeOrFirstNameLikeOrLastNameLike(identificationNumber,firstName,lastName);
+    }
+
+    @Override
     public Optional<List<BeneficiaryIdentification>> findAll() {
         return Optional.ofNullable(beneficiaryIdentificationRepository.findAll());
     }

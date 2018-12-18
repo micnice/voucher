@@ -9,6 +9,7 @@ import zw.co.deepkah.voucher.service.BeneficiaryIdentificationService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Component
 @AllArgsConstructor
@@ -24,5 +25,10 @@ public class BeneficiaryIdentificationQueryResolver implements GraphQLQueryResol
 
        public BeneficiaryIdentification getByIdentificationNumber(String identityNumber){
         return beneficiaryIdentificationService.findByIdentificationNumber(identityNumber);
+       }
+
+       public List<BeneficiaryIdentification> trackBeneficiary(String identificationNumber,String firstName,String lastName){
+
+        return beneficiaryIdentificationService.trackBeneficiary(identificationNumber,firstName,lastName);
        }
 }

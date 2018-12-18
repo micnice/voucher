@@ -1,0 +1,28 @@
+type BeneficiaryAssessment{
+      id:ID
+      beneficiaryIdentityId:String
+      pregnancyStatus:PregnancyStatus
+      povertyScore:Long
+      latitude:String
+      longitude:String
+
+}
+extend type Query {
+    beneficiaryAssessmentById(id:ID):BeneficiaryAssessment
+    beneficiaryAssessmentByBeneficiaryIdentityId(beneficiaryIdentityId:ID):BeneficiaryAssessment
+    beneficiaryAssessmentList:[BeneficiaryAssessment]
+
+}
+
+input BeneficiaryAssessmentInput{
+    beneficiaryIdentityId:String
+    pregnancyStatus:PregnancyStatus
+    povertyScore:Long
+    latitude:String
+    longitude:String
+}
+
+extend type Mutation {
+     createBeneficiaryAssessment(beneficiaryAssessmentInput:BeneficiaryAssessmentInput):BeneficiaryAssessment
+     updateBeneficiaryAssessment(beneficiaryAssessmentInput:BeneficiaryAssessmentInput,id:ID):BeneficiaryAssessment
+}

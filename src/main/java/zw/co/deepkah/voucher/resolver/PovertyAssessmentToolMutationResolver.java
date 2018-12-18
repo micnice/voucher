@@ -7,6 +7,7 @@ import zw.co.deepkah.voucher.document.PovertyAssessmentTool;
 import zw.co.deepkah.voucher.dto.PovertyAssessmentToolDto;
 import zw.co.deepkah.voucher.service.PovertyAssessmentToolService;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -86,6 +87,9 @@ public class PovertyAssessmentToolMutationResolver implements GraphQLMutationRes
         Long falseCount = Stream.of(pat).filter(falseBoolean -> falseBoolean.booleanValue()==Boolean.FALSE).count();
         povertyAssessmentTool.setFalseCount(falseCount);
         povertyAssessmentTool.setTrueCount(trueCount);
+        povertyAssessmentTool.setDateCreated(LocalDate.now());
+        povertyAssessmentTool.setCreatedBy("DEEPKAH");
+
 
         return povertyAssessmentToolService.save(povertyAssessmentTool);
     }

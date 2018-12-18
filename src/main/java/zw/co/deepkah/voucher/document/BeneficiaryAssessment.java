@@ -4,8 +4,9 @@ import lombok.Data;
 
 @Data
 public class BeneficiaryAssessment extends BaseId {
-   private PregnacyStatus pregnacyStatus;
-   private Double povertyScore;
+   private String beneficiaryIdentityId;
+   private PregnancyStatus pregnancyStatus;
+   private Long povertyScore;
    private String latitude;
    private String longitude;
 

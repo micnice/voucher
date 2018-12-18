@@ -1,0 +1,8 @@
+enum PregnancyStatus{
+    YES,NO,NA
+}
+
+extend type Query {
+    pregnacyStatusList:[PregnancyStatus]
+}
+

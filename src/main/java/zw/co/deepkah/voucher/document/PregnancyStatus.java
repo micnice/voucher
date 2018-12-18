@@ -1,5 +1,5 @@
 package zw.co.deepkah.voucher.document;
 
-public enum PregnacyStatus {
+public enum PregnancyStatus {
     YES,NO,NA
 }

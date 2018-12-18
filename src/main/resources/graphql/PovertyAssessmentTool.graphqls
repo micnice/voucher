@@ -14,6 +14,8 @@ type PovertyAssessmentTool{
     pat11:Boolean
     trueCount:Long
     falseCount:Long
+    dateCreated:String
+    createdBy:String
 }
 
 extend type Query {
