@@ -19,6 +19,8 @@ public class PovertyAssessmentTool extends BaseId {
     private Boolean pat9;
     private Boolean pat10;
     private Boolean pat11;
+    private Long trueCount;
+    private Long falseCount;
 
 
 }

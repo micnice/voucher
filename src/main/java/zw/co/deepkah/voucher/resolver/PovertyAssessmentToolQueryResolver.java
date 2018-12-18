@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import zw.co.deepkah.voucher.document.PovertyAssessmentTool;
 import zw.co.deepkah.voucher.service.PovertyAssessmentToolService;
 
+import java.util.List;
+
 @Component
 @AllArgsConstructor
 public class PovertyAssessmentToolQueryResolver implements GraphQLQueryResolver {
@@ -14,5 +16,9 @@ public class PovertyAssessmentToolQueryResolver implements GraphQLQueryResolver 
 
     public PovertyAssessmentTool getPovertyAssessmentToolBybeneficiaryIdentityId(String beneficiaryIdentityId){
         return povertyAssessmentToolService.findByBeneficiaryIdentityId(beneficiaryIdentityId);
+    }
+
+    public List<PovertyAssessmentTool> getPovertyAssessmentToolList(){
+        return povertyAssessmentToolService.findAll().get();
     }
 }

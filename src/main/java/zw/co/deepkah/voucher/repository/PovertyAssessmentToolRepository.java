@@ -7,4 +7,5 @@ public interface PovertyAssessmentToolRepository extends MongoRepository<Poverty
 
 
     PovertyAssessmentTool findByBeneficiaryIdentityId(String beneficiaryIdentityId);
+
 }

@@ -12,10 +12,13 @@ type PovertyAssessmentTool{
     pat9:Boolean
     pat10:Boolean
     pat11:Boolean
+    trueCount:Long
+    falseCount:Long
 }
 
 extend type Query {
-    PovertyAssessmentToolBybeneficiaryIdentityId(beneficiaryIdentityId:ID):PovertyAssessmentTool
+    povertyAssessmentToolBybeneficiaryIdentityId(beneficiaryIdentityId:ID):PovertyAssessmentTool
+    povertyAssessmentToolList:[PovertyAssessmentTool]
 }
 
 input PovertyAssessmentToolInput{

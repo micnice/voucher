@@ -8,14 +8,18 @@ import zw.co.deepkah.voucher.dto.PovertyAssessmentToolDto;
 import zw.co.deepkah.voucher.service.PovertyAssessmentToolService;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Component
 @AllArgsConstructor
-public class createPovertyAssessmentToolMutationResolver implements GraphQLMutationResolver {
+public class PovertyAssessmentToolMutationResolver implements GraphQLMutationResolver {
 
     private PovertyAssessmentToolService povertyAssessmentToolService;
 
     public PovertyAssessmentTool createPovertyAssessmentTool(PovertyAssessmentToolDto povertyAssessmentToolDto){
+
+
+
         PovertyAssessmentTool povertyAssessmentTool = new PovertyAssessmentTool();
         povertyAssessmentTool.setBeneficiaryIdentityId(povertyAssessmentToolDto.getBeneficiaryIdentityId());
         povertyAssessmentTool.setPat1(povertyAssessmentToolDto.getPat1());
@@ -29,6 +33,20 @@ public class createPovertyAssessmentToolMutationResolver implements GraphQLMutat
         povertyAssessmentTool.setPat9(povertyAssessmentToolDto.getPat9());
         povertyAssessmentTool.setPat10(povertyAssessmentToolDto.getPat10());
         povertyAssessmentTool.setPat11(povertyAssessmentToolDto.getPat11());
+        Boolean [] pat = {povertyAssessmentTool.getPat1(),povertyAssessmentTool.getPat2(),
+                povertyAssessmentTool.getPat3(),
+                povertyAssessmentTool.getPat4(),
+                povertyAssessmentTool.getPat5(),
+                povertyAssessmentTool.getPat6(),
+                povertyAssessmentTool.getPat7(),
+                povertyAssessmentTool.getPat8(),
+                povertyAssessmentTool.getPat9(),
+                povertyAssessmentTool.getPat10(),
+                povertyAssessmentTool.getPat11()};
+         Long trueCount= Stream.of(pat).filter(trueBoolean -> trueBoolean.booleanValue()==Boolean.TRUE).count();
+         Long falseCount = Stream.of(pat).filter(falseBoolean -> falseBoolean.booleanValue()==Boolean.FALSE).count();
+         povertyAssessmentTool.setFalseCount(falseCount);
+         povertyAssessmentTool.setTrueCount(trueCount);
 
 
         return povertyAssessmentToolService.save(povertyAssessmentTool);
@@ -52,8 +70,23 @@ public class createPovertyAssessmentToolMutationResolver implements GraphQLMutat
             povertyAssessmentTool.setPat9(povertyAssessmentToolDto.getPat9());
             povertyAssessmentTool.setPat10(povertyAssessmentToolDto.getPat10());
             povertyAssessmentTool.setPat11(povertyAssessmentToolDto.getPat11());
-
             });
+
+        Boolean [] pat = {povertyAssessmentTool.getPat1(),povertyAssessmentTool.getPat2(),
+                povertyAssessmentTool.getPat3(),
+                povertyAssessmentTool.getPat4(),
+                povertyAssessmentTool.getPat5(),
+                povertyAssessmentTool.getPat6(),
+                povertyAssessmentTool.getPat7(),
+                povertyAssessmentTool.getPat8(),
+                povertyAssessmentTool.getPat9(),
+                povertyAssessmentTool.getPat10(),
+                povertyAssessmentTool.getPat11()};
+        Long trueCount= Stream.of(pat).filter(trueBoolean -> trueBoolean.booleanValue()==Boolean.TRUE).count();
+        Long falseCount = Stream.of(pat).filter(falseBoolean -> falseBoolean.booleanValue()==Boolean.FALSE).count();
+        povertyAssessmentTool.setFalseCount(falseCount);
+        povertyAssessmentTool.setTrueCount(trueCount);
+
         return povertyAssessmentToolService.save(povertyAssessmentTool);
     }
 }
