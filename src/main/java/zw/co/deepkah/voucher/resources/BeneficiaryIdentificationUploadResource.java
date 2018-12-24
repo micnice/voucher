@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,27 +17,26 @@ import zw.co.deepkah.voucher.service.BeneficiaryIdentificationService;
 import zw.co.deepkah.voucher.service.ContactDetailsService;
 
 
-import java.io.IOException;
+
 import java.time.LocalDate;
 import java.util.Iterator;
 
 @Data
 @AllArgsConstructor
 @RestController
-public class BeneficiaryIdentificationUpload {
+@RequestMapping("/api/")
+public class BeneficiaryIdentificationUploadResource {
 
     private BeneficiaryIdentificationService beneficiaryIdentificationService;
     private BeneficiaryAssessmentService beneficiaryAssessmentService;
     private AddressDetailsService addressDetailsService;
     private ContactDetailsService contactDetailsService;
 
-    private static final String filename = "upload-dir/bvr.xls";
 
 
+    @PostMapping("/excel-upload")
     public BeneficiaryIdentification readExcelUpload(@RequestParam("file") MultipartFile multipartFile) throws Exception {
 
-        beneficiaryIdentificationService.store(multipartFile);
-        
         BeneficiaryIdentificationDto beneficiaryIdentificationDto = new BeneficiaryIdentificationDto();
         AddressDetails addressDetails = new AddressDetails();
         ContactDetails contactDetails = new ContactDetails();
@@ -70,9 +71,9 @@ public class BeneficiaryIdentificationUpload {
                 } else if (currentCell.getCellType() == CellType.STRING) {
                     beneficiaryIdentificationDto.setParity(Long.valueOf(currentCell.getStringCellValue()));
                 } else if (currentCell.getCellType() == CellType.STRING) {
-                    beneficiaryIdentificationDto.setMaritalStatus(currentCell.getStringCellValue());
+                    beneficiaryIdentificationDto.setMaritalStatusDto(currentCell.getStringCellValue());
                 } else if (currentCell.getCellType() == CellType.STRING) {
-                    beneficiaryIdentificationDto.setEducationStatus(currentCell.getStringCellValue());
+                    beneficiaryIdentificationDto.setEducationStatusDto(currentCell.getStringCellValue());
                 } else if (currentCell.getCellType() == CellType.STRING) {
                     beneficiaryIdentificationDto.setBirthDate(LocalDate.parse(currentCell.getStringCellValue()));
                 } else if (currentCell.getCellType() == CellType.STRING) {
@@ -100,13 +101,13 @@ public class BeneficiaryIdentificationUpload {
         beneficiaryIdentification.setDateCreated(beneficiaryIdentificationDto.getDateIdentified());
 
 
-        if (beneficiaryIdentificationDto.getMaritalStatus().equalsIgnoreCase(MaritalStatus.DIVORCED.toString()))
+        if (beneficiaryIdentificationDto.getMaritalStatusDto().equalsIgnoreCase(MaritalStatus.DIVORCED.toString()))
             beneficiaryIdentification.setMaritalStatus(MaritalStatus.DIVORCED);
-        else if (beneficiaryIdentificationDto.getMaritalStatus().equalsIgnoreCase(MaritalStatus.MARRIED.toString()))
+        else if (beneficiaryIdentificationDto.getMaritalStatusDto().equalsIgnoreCase(MaritalStatus.MARRIED.toString()))
             beneficiaryIdentification.setMaritalStatus(MaritalStatus.MARRIED);
-        else if (beneficiaryIdentificationDto.getMaritalStatus().equalsIgnoreCase(MaritalStatus.SINGLE.toString()))
+        else if (beneficiaryIdentificationDto.getMaritalStatusDto().equalsIgnoreCase(MaritalStatus.SINGLE.toString()))
             beneficiaryIdentification.setMaritalStatus(MaritalStatus.SINGLE);
-        else if (beneficiaryIdentificationDto.getMaritalStatus().equalsIgnoreCase(MaritalStatus.WIDOWED.toString()))
+        else if (beneficiaryIdentificationDto.getMaritalStatusDto().equalsIgnoreCase(MaritalStatus.WIDOWED.toString()))
             beneficiaryIdentification.setMaritalStatus(MaritalStatus.SINGLE);
         beneficiaryIdentification.setLongitude(beneficiaryIdentificationDto.getLongitude());
         beneficiaryIdentification.setLatitude(beneficiaryIdentificationDto.getLatitude());
