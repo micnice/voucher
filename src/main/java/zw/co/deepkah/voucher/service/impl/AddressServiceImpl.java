@@ -26,11 +26,6 @@ public class AddressServiceImpl implements AddressDetailsService {
         return Optional.ofNullable(addressDetailsRepository.findById(Id).get());
     }
 
-//    @Override
-//    public Optional<String> getOne(String Id) {
-//        return Optional.ofNullable(addressDetailsRepository.findById(Id));
-//    }
-
     @Override
     public void removeById(String Id) {
           addressDetailsRepository.deleteById(Id);
