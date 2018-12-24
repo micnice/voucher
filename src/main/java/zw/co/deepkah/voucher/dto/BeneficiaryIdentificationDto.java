@@ -7,15 +7,25 @@ import zw.co.deepkah.voucher.document.MaritalStatus;
 import java.time.LocalDate;
 @Data
 public class BeneficiaryIdentificationDto {
+
     private String firstName;
     private String lastName;
-    private MaritalStatus maritalStatus;
+    private String maritalStatusDto;
     private LocalDate birthDate;
+    private MaritalStatus maritalStatus;
     private EducationStatus educationStatus;
+    private String educationStatusDto;
     private LocalDate lmp;
     private Long parity;
     private String identificationNumber;
     private String latitude;
     private String longitude;
+    private String phoneNumber;
+    private String address;
+    private LocalDate dateIdentified;
+    private String IdentifiedBy;
+    private String pregnancyStatus;
+    private String ga;
+
 
 }
