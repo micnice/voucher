@@ -1,25 +1,41 @@
 package zw.co.deepkah.voucher.service.impl;
 
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import zw.co.deepkah.voucher.document.BeneficiaryIdentification;
 import zw.co.deepkah.voucher.repository.BeneficiaryIdentificationRepository;
 import zw.co.deepkah.voucher.service.BeneficiaryIdentificationService;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+
 public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentificationService {
 
     private BeneficiaryIdentificationRepository beneficiaryIdentificationRepository;
+
+
+    public BeneficiaryIdentificationServiceImpl(BeneficiaryIdentificationRepository beneficiaryIdentificationRepository) {
+        this.beneficiaryIdentificationRepository = beneficiaryIdentificationRepository;
+
+
+    }
 
     @Override
     public BeneficiaryIdentification findByIdentificationNumber(String identityNumber) {
         return beneficiaryIdentificationRepository.findByIdentificationNumber(identityNumber);
     }
+
+
 
     @Override
     public List<BeneficiaryIdentification> findAllByLmp(LocalDate localDate) {
