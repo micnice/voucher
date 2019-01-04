@@ -27,6 +27,7 @@ public class BeneficiaryIdentificationMutationResolver implements GraphQLMutatio
           beneficiaryIdentification.setLongitude(beneficiaryIdentificationDto.getLongitude());
           beneficiaryIdentification.setParity(beneficiaryIdentificationDto.getParity());
           beneficiaryIdentification.setMaritalStatus(beneficiaryIdentificationDto.getMaritalStatus());
+          beneficiaryIdentification.setDataCollectionDate(beneficiaryIdentificationDto.getDataCollectionDate());
           return  beneficiaryIdentificationService.save(beneficiaryIdentification);
     }
 }

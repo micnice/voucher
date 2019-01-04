@@ -20,6 +20,7 @@ public class BeneficiaryIdentification extends BaseId {
     private String latitude;
     private String longitude;
     private Boolean isAssessed = Boolean.FALSE;
+    private LocalDate dataCollectionDate;
 
 
 

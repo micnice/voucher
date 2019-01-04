@@ -11,6 +11,7 @@ type BeneficiaryIdentification{
     latitude:String
     longitude:String
     isAssessed:Boolean
+    dataCollectionDate:String
 }
 
 type Query {
@@ -30,6 +31,7 @@ input BeneficiaryIdentificationInput{
     identificationNumber:String
     latitude:String
     longitude:String
+    dataCollectionDate:String
 }
 
 type Mutation {
