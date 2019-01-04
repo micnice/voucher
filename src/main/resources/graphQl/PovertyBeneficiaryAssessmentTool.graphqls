@@ -1,12 +1,47 @@
-schema {
-    query: Query
-    mutation: Mutation
+type PovertyBeneficiaryAssessmentTool{
+#---------------------------------------------------------
+    beneficiaryIdentityId:String
+    pregnancyStatus:PregnancyStatus
+    povertyScore:Long
+    latitude:String
+    longitude:String
+#----------------------------------------------------------
+    pat1:Boolean
+    pat2:Boolean
+    pat3:Boolean
+    pat4:Boolean
+    pat5:Boolean
+    pat6:Boolean
+    pat7:Boolean
+    pat8:Boolean
+    pat9:Boolean
+    pat10:Boolean
+    pat11:Boolean
+
 }
 
-type Query {
+input PovertyBeneficiaryAssessmentToolInput{
+    #---------------------------------------------------------
+    beneficiaryIdentityId:String
+    pregnancyStatus:PregnancyStatus
+    latitude:String
+    longitude:String
+    #----------------------------------------------------------
+    pat1:Boolean
+    pat2:Boolean
+    pat3:Boolean
+    pat4:Boolean
+    pat5:Boolean
+    pat6:Boolean
+    pat7:Boolean
+    pat8:Boolean
+    pat9:Boolean
+    pat10:Boolean
+    pat11:Boolean
+
 
 }
 
-type Mutation {
-
+extend type Mutation {
+createPovertyBeneficiaryAssessmentTool(povertyBeneficiaryAssessmentToolInput:PovertyBeneficiaryAssessmentToolInput):PovertyBeneficiaryAssessmentTool
 }
