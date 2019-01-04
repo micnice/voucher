@@ -31,4 +31,15 @@ public class BeneficiaryIdentificationQueryResolver implements GraphQLQueryResol
 
         return beneficiaryIdentificationService.trackBeneficiary(identificationNumber,firstName,lastName);
        }
+
+
+       public  List<BeneficiaryIdentification> getIdentificationList(){
+
+        return beneficiaryIdentificationService.findAll().get();
+       }
+
+       public List<BeneficiaryIdentification> getIdentificationNotAssessed(){
+
+        return beneficiaryIdentificationService.getIdentificationNotAssessed();
+       }
 }

@@ -10,12 +10,16 @@ type BeneficiaryIdentification{
     identificationNumber:String
     latitude:String
     longitude:String
+    isAssessed:Boolean
+    dataCollectionDate:String
 }
 
 type Query {
     lMPList(lmp:String):[BeneficiaryIdentification]
     byIdentificationNumber(identificationNumber:String):BeneficiaryIdentification
     trackBeneficiary(identificationNumber:String,firstName:String,lastName:String):[BeneficiaryIdentification]
+    identificationList:[BeneficiaryIdentification]
+    identificationNotAssessed:[BeneficiaryIdentification]
 }
 
 input BeneficiaryIdentificationInput{
@@ -29,6 +33,7 @@ input BeneficiaryIdentificationInput{
     identificationNumber:String
     latitude:String
     longitude:String
+    dataCollectionDate:String
 }
 
 type Mutation {

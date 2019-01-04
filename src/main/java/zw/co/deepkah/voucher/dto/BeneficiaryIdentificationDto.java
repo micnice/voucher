@@ -25,6 +25,7 @@ public class BeneficiaryIdentificationDto {
     private LocalDate dateIdentified;
     private String IdentifiedBy;
     private String pregnancyStatus;
+    private LocalDate dataCollectionDate;
     private String ga;
 
 
