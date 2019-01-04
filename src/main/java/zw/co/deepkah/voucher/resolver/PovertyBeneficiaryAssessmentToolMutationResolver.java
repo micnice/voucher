@@ -10,9 +10,11 @@ import zw.co.deepkah.voucher.dto.GeneralDto;
 import zw.co.deepkah.voucher.service.BeneficiaryAssessmentService;
 import zw.co.deepkah.voucher.service.PovertyAssessmentToolService;
 
+import java.util.stream.Stream;
+
 @Component
 @AllArgsConstructor
-public class CreatePovertyBeneficiaryAssessmentToolMutationResolver implements GraphQLMutationResolver {
+public class PovertyBeneficiaryAssessmentToolMutationResolver implements GraphQLMutationResolver {
 
     private BeneficiaryAssessmentService beneficiaryAssessmentService;
     private PovertyAssessmentToolService povertyAssessmentToolService;
@@ -34,12 +36,29 @@ public class CreatePovertyBeneficiaryAssessmentToolMutationResolver implements G
         povertyAssessmentTool.setPat9(povertyBeneficiaryAssessmentTool.getPat9());
         povertyAssessmentTool.setPat10(povertyBeneficiaryAssessmentTool.getPat10());
         povertyAssessmentTool.setPat11(povertyBeneficiaryAssessmentTool.getPat11());
-        Long povertyScore = povertyAssessmentToolService.save(povertyAssessmentTool).getTrueCount();
+
+        Boolean [] pat = {povertyAssessmentTool.getPat1(),povertyAssessmentTool.getPat2(),
+                povertyAssessmentTool.getPat3(),
+                povertyAssessmentTool.getPat4(),
+                povertyAssessmentTool.getPat5(),
+                povertyAssessmentTool.getPat6(),
+                povertyAssessmentTool.getPat7(),
+                povertyAssessmentTool.getPat8(),
+                povertyAssessmentTool.getPat9(),
+                povertyAssessmentTool.getPat10(),
+                povertyAssessmentTool.getPat11()};
+        Long trueCount= Stream.of(pat).filter(trueBoolean -> trueBoolean.booleanValue()==Boolean.TRUE).count();
+        Long falseCount = Stream.of(pat).filter(falseBoolean -> falseBoolean.booleanValue()==Boolean.FALSE).count();
+        povertyAssessmentTool.setFalseCount(falseCount);
+        povertyAssessmentTool.setTrueCount(trueCount);
+
+
+        povertyAssessmentToolService.save(povertyAssessmentTool);
 
         //------------------------------------------------------------------------------------------
         beneficiaryAssessment.setLatitude(povertyBeneficiaryAssessmentTool.getLatitude());
         beneficiaryAssessment.setLongitude(povertyBeneficiaryAssessmentTool.getLongitude());
-        beneficiaryAssessment.setPovertyScore(povertyScore);
+        beneficiaryAssessment.setPovertyScore(povertyAssessmentTool.getTrueCount());
         beneficiaryAssessment.setPregnancyStatus(povertyBeneficiaryAssessmentTool.getPregnancyStatus());
         beneficiaryAssessmentService.save(beneficiaryAssessment);
         //----------------------------------------------------------------------------------------
