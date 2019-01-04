@@ -20,6 +20,13 @@ public interface IService<T> {
         void remove(T t);
         T save(T t);
 
+        default boolean duplicate(T t){
+            if(t.equals(t)){
+                return true;
+            }
+            return false;
+          }
+
     default  void init(){}
 
     default void store(MultipartFile file) throws Exception {

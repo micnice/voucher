@@ -1,12 +1,15 @@
-schema {
-    query: Query
-    mutation: Mutation
+enum Role{
+
+    ADMINISTRATOR
+    BENEFICIARY_ASSESSOR
+    BENEFICIARY_IDENTIFIER
+    CLAIMS_ASSESSOR
+    INSTITUTION_MANAGER
+    DATA_ENTRY_CLERK
+    MANAGEMENT
 }
 
-type Query {
-
+extend type Query {
+roleList:[Role]
 }
 
-type Mutation {
-
-}

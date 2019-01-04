@@ -4,12 +4,13 @@ import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Document
 @Data
-public class VoucherPriceScale extends BaseId {
+public class VoucherSet extends BaseId {
 
-    private VoucherType voucherType;
-    private ServiceProvisionLevel serviceProvisionLevel;
-    private BigDecimal priceOfService;
+   private String name;
+   private String description;
+   private Set<VoucherType> voucherTypeSet;
 }

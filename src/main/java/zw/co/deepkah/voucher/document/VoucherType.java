@@ -11,6 +11,10 @@ public class VoucherType extends BaseId {
 
     private String name;
     private String description;
+    private Level level;
+    private Double price;
+
+
 
     public VoucherType(String id) {
         super(id);

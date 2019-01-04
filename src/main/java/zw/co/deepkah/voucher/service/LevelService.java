@@ -1,4 +1,8 @@
 package zw.co.deepkah.voucher.service;
 
-public class LevelService {
+import zw.co.deepkah.voucher.document.Level;
+
+public interface LevelService extends IService<Level> {
+
+
 }

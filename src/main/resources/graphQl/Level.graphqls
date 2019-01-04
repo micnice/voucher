@@ -1,12 +1,19 @@
-schema {
-    query: Query
-    mutation: Mutation
-}
-
-type Query {
+type Level{
+    id:ID
+    name:String
+    description:String
 
 }
+extend type Query {
+levelList:[Level]
+    levelById(id:ID):Level
 
-type Mutation {
-
+}
+input LevelInput{
+    name:String
+    description:String
+}
+extend type Mutation {
+    createLevel(levelInput:LevelInput):Level
+    updateLevel(levelInput:LevelInput,id:ID):Level
 }

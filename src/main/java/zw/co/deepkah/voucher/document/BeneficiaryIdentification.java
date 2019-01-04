@@ -2,11 +2,13 @@ package zw.co.deepkah.voucher.document;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
+@Document(collection = "beneficiary_identification")
 public class BeneficiaryIdentification extends BaseId {
 
     private String firstName;
