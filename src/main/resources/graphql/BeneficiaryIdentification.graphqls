@@ -18,6 +18,8 @@ type Query {
     lMPList(lmp:String):[BeneficiaryIdentification]
     byIdentificationNumber(identificationNumber:String):BeneficiaryIdentification
     trackBeneficiary(identificationNumber:String,firstName:String,lastName:String):[BeneficiaryIdentification]
+    identificationList:[BeneficiaryIdentification]
+    identificationNotAssessed:[BeneficiaryIdentification]
 }
 
 input BeneficiaryIdentificationInput{

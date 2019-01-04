@@ -10,4 +10,5 @@ public interface BeneficiaryIdentificationService extends IService<BeneficiaryId
     BeneficiaryIdentification findByIdentificationNumber(String identityNumber);
     List<BeneficiaryIdentification> findAllByLmp(LocalDate localDate);
     List<BeneficiaryIdentification> trackBeneficiary(String identificationNumber,String firstName,String lastName);
+    List<BeneficiaryIdentification> getIdentificationNotAssessed();
 }

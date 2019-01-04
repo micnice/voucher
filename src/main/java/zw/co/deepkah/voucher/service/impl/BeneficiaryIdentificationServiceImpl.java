@@ -48,6 +48,11 @@ public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentif
     }
 
     @Override
+    public List<BeneficiaryIdentification> getIdentificationNotAssessed() {
+        return beneficiaryIdentificationRepository.findByIsAssessedIsFalse();
+    }
+
+    @Override
     public Optional<List<BeneficiaryIdentification>> findAll() {
         return Optional.ofNullable(beneficiaryIdentificationRepository.findAll());
     }
