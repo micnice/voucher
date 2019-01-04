@@ -10,6 +10,7 @@ type BeneficiaryIdentification{
     identificationNumber:String
     latitude:String
     longitude:String
+    isAssessed:Boolean
 }
 
 type Query {
