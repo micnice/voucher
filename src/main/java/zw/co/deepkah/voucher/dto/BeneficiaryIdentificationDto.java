@@ -11,11 +11,11 @@ public class BeneficiaryIdentificationDto {
     private String firstName;
     private String lastName;
     private String maritalStatusDto;
-    private LocalDate birthDate;
+    private String birthDate;
     private MaritalStatus maritalStatus;
     private EducationStatus educationStatus;
     private String educationStatusDto;
-    private LocalDate lmp;
+    private String lmp;
     private Long parity;
     private String identificationNumber;
     private String latitude;
@@ -25,7 +25,7 @@ public class BeneficiaryIdentificationDto {
     private LocalDate dateIdentified;
     private String IdentifiedBy;
     private String pregnancyStatus;
-    private LocalDate dataCollectionDate;
+    private String dataCollectionDate;
     private String ga;
 
 

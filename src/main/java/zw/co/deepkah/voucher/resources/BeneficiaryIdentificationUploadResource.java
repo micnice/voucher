@@ -15,7 +15,7 @@ import zw.co.deepkah.voucher.service.AddressDetailsService;
 import zw.co.deepkah.voucher.service.BeneficiaryAssessmentService;
 import zw.co.deepkah.voucher.service.BeneficiaryIdentificationService;
 import zw.co.deepkah.voucher.service.ContactDetailsService;
-
+import zw.co.deepkah.voucher.util.DateFormatter;
 
 
 import java.time.LocalDate;
@@ -75,9 +75,9 @@ public class BeneficiaryIdentificationUploadResource {
                 } else if (currentCell.getCellType() == CellType.STRING) {
                     beneficiaryIdentificationDto.setEducationStatusDto(currentCell.getStringCellValue());
                 } else if (currentCell.getCellType() == CellType.STRING) {
-                    beneficiaryIdentificationDto.setBirthDate(LocalDate.parse(currentCell.getStringCellValue()));
+                    beneficiaryIdentificationDto.setBirthDate(currentCell.getStringCellValue());
                 } else if (currentCell.getCellType() == CellType.STRING) {
-                    beneficiaryIdentificationDto.setLmp(LocalDate.parse(currentCell.getStringCellValue()));
+                    beneficiaryIdentificationDto.setLmp(currentCell.getStringCellValue());
                 } else if (currentCell.getCellType() == CellType.STRING) {
                     beneficiaryIdentificationDto.setDateIdentified(LocalDate.parse(currentCell.getStringCellValue()));
                 } else if (currentCell.getCellType() == CellType.STRING) {
@@ -95,8 +95,8 @@ public class BeneficiaryIdentificationUploadResource {
         beneficiaryIdentification.setLastName(beneficiaryIdentificationDto.getLastName());
         beneficiaryIdentification.setIdentificationNumber(beneficiaryIdentificationDto.getIdentificationNumber());
         beneficiaryIdentification.setParity(beneficiaryIdentificationDto.getParity());
-        beneficiaryIdentification.setLmp(beneficiaryIdentificationDto.getLmp());
-        beneficiaryIdentification.setBirthDate(beneficiaryIdentificationDto.getBirthDate());
+        beneficiaryIdentification.setLmp(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getLmp()));
+        beneficiaryIdentification.setBirthDate(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getBirthDate()));
         beneficiaryIdentification.setCreatedBy(beneficiaryIdentificationDto.getIdentifiedBy());
         beneficiaryIdentification.setDateCreated(beneficiaryIdentificationDto.getDateIdentified());
 
