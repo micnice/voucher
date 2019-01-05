@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import zw.co.deepkah.voucher.document.BeneficiaryIdentification;
 import zw.co.deepkah.voucher.dto.BeneficiaryIdentificationDto;
 import zw.co.deepkah.voucher.service.BeneficiaryIdentificationService;
+import zw.co.deepkah.voucher.util.DateFormatter;
 
 @Component
 @AllArgsConstructor
@@ -18,13 +19,14 @@ public class BeneficiaryIdentificationMutationResolver implements GraphQLMutatio
         BeneficiaryIdentification beneficiaryIdentification = new BeneficiaryIdentification();
         beneficiaryIdentification.setFirstName(beneficiaryIdentificationDto.getFirstName());
         beneficiaryIdentification.setLastName(beneficiaryIdentificationDto.getLastName());
-        beneficiaryIdentification.setBirthDate(beneficiaryIdentificationDto.getBirthDate());
+        beneficiaryIdentification.setBirthDate(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getBirthDate()));
         beneficiaryIdentification.setEducationStatus(beneficiaryIdentificationDto.getEducationStatus());
         beneficiaryIdentification.setIdentificationNumber(beneficiaryIdentificationDto.getIdentificationNumber());
-        beneficiaryIdentification.setLmp(beneficiaryIdentificationDto.getLmp());
+        beneficiaryIdentification.setLmp(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getLmp()));
         beneficiaryIdentification.setLatitude(beneficiaryIdentificationDto.getLatitude());
         beneficiaryIdentification.setLongitude(beneficiaryIdentificationDto.getLongitude());
         beneficiaryIdentification.setParity(beneficiaryIdentificationDto.getParity());
+        beneficiaryIdentification.setDataCollectionDate(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getDataCollectionDate()));
         beneficiaryIdentification.setMaritalStatus(beneficiaryIdentificationDto.getMaritalStatus());
         return  beneficiaryIdentificationService.save(beneficiaryIdentification);
     }
