@@ -3,11 +3,14 @@ package zw.co.deepkah.voucher.document;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+
 @Data
 @Document(collection = "poverty_assessment_tool")
 public class PovertyAssessmentTool extends BaseId {
 
     private String beneficiaryIdentityId;
+    private LocalDate dateAssesed;
     private Boolean pat1;
     private Boolean pat2;
     private Boolean pat3;

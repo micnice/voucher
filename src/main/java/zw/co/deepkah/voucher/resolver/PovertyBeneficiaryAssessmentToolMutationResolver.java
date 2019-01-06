@@ -4,11 +4,14 @@ import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import zw.co.deepkah.voucher.document.BeneficiaryAssessment;
+import zw.co.deepkah.voucher.document.BeneficiaryIdentification;
 import zw.co.deepkah.voucher.document.PovertyAssessmentTool;
 import zw.co.deepkah.voucher.document.PovertyBeneficiaryAssessmentTool;
 import zw.co.deepkah.voucher.dto.GeneralDto;
 import zw.co.deepkah.voucher.service.BeneficiaryAssessmentService;
+import zw.co.deepkah.voucher.service.BeneficiaryIdentificationService;
 import zw.co.deepkah.voucher.service.PovertyAssessmentToolService;
+import zw.co.deepkah.voucher.util.DateFormatter;
 
 import java.util.stream.Stream;
 
@@ -18,6 +21,7 @@ public class PovertyBeneficiaryAssessmentToolMutationResolver implements GraphQL
 
     private BeneficiaryAssessmentService beneficiaryAssessmentService;
     private PovertyAssessmentToolService povertyAssessmentToolService;
+    private BeneficiaryIdentificationService beneficiaryIdentificationService;
 
 
     public PovertyBeneficiaryAssessmentTool createPovertyBeneficiaryAssessmentTool(PovertyBeneficiaryAssessmentTool povertyBeneficiaryAssessmentTool) {
@@ -36,6 +40,7 @@ public class PovertyBeneficiaryAssessmentToolMutationResolver implements GraphQL
         povertyAssessmentTool.setPat9(povertyBeneficiaryAssessmentTool.getPat9());
         povertyAssessmentTool.setPat10(povertyBeneficiaryAssessmentTool.getPat10());
         povertyAssessmentTool.setPat11(povertyBeneficiaryAssessmentTool.getPat11());
+        povertyAssessmentTool.setDateAssesed(DateFormatter.getDateFromString(povertyBeneficiaryAssessmentTool.getDateAssessed()));
 
         Boolean [] pat = {povertyAssessmentTool.getPat1(),povertyAssessmentTool.getPat2(),
                 povertyAssessmentTool.getPat3(),
@@ -61,8 +66,14 @@ public class PovertyBeneficiaryAssessmentToolMutationResolver implements GraphQL
         beneficiaryAssessment.setPovertyScore(povertyAssessmentTool.getTrueCount());
         beneficiaryAssessment.setPregnancyStatus(povertyBeneficiaryAssessmentTool.getPregnancyStatus());
         beneficiaryAssessment.setBeneficiaryIdentityId(povertyBeneficiaryAssessmentTool.getBeneficiaryIdentityId());
+        beneficiaryAssessment.setDateAssessed(DateFormatter.getDateFromString(povertyBeneficiaryAssessmentTool.getDateAssessed()));
         beneficiaryAssessmentService.save(beneficiaryAssessment);
         //----------------------------------------------------------------------------------------
+        BeneficiaryIdentification beneficiaryIdentification
+                = beneficiaryIdentificationService.getOne(povertyAssessmentTool.getBeneficiaryIdentityId()).get();
+        beneficiaryIdentification.setIsAssessed(Boolean.TRUE);
+       beneficiaryIdentificationService.save(beneficiaryIdentification);
+
        return povertyBeneficiaryAssessmentTool;
 
     }
