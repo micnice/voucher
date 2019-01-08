@@ -5,7 +5,7 @@ type Level{
 
 }
 extend type Query {
-levelList:[Level]
+    levelList:[Level]
     levelById(id:ID):Level
 
 }

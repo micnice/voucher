@@ -1,6 +1,9 @@
 type VoucherType{
     name:String
     description:String
+    levelId:ID
+    price:BigDecimal
+
 }
 
 extend type Query {
@@ -11,6 +14,8 @@ extend type Query {
 input VoucherTypeInput{
     name:String
     description:String
+    levelId:ID
+    price:BigDecimal
 }
 
 extend type Mutation {

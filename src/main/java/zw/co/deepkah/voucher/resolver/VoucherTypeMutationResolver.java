@@ -20,6 +20,8 @@ public class VoucherTypeMutationResolver implements GraphQLMutationResolver {
         VoucherType voucherType= new VoucherType();
         voucherType.setName(voucherTypeDto.getName());
         voucherType.setDescription(voucherTypeDto.getDescription());
+        voucherType.setLevelId(voucherTypeDto.getLevelId());
+        voucherType.setPrice(voucherTypeDto.getPrice());
         return voucherTypeService.save(voucherType);
     }
 
@@ -30,6 +32,8 @@ public class VoucherTypeMutationResolver implements GraphQLMutationResolver {
             voucherType.setId(voucherTypeService.getOne(s).get().getId());
             voucherType.setName(voucherTypeDto.getName());
             voucherType.setDescription(voucherTypeDto.getDescription());
+            voucherType.setLevelId(voucherTypeDto.getLevelId());
+            voucherType.setPrice(voucherTypeDto.getPrice());
         });
 
         return voucherType;

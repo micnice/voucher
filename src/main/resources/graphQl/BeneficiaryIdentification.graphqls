@@ -37,5 +37,6 @@ input BeneficiaryIdentificationInput{
 }
 
 type Mutation {
-    createBeneficiaryIdentification(BeneficiaryIdentificationInput:BeneficiaryIdentificationInput):BeneficiaryIdentification
+    createBeneficiaryIdentification(beneficiaryIdentificationInput:BeneficiaryIdentificationInput):BeneficiaryIdentification
+    updateBeneficiaryIdentification(beneficiaryIdentificationInput:BeneficiaryIdentificationInput,id:ID):BeneficiaryIdentification
 }

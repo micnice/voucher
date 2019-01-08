@@ -9,9 +9,12 @@ import java.time.LocalDate;
 @Document(collection = "sales")
 public class Sales extends BaseId {
 
+    private String beneficiaryIdentityId;
     private String voucherSerialNumber;
     private LocalDate saleDate;
     private String soldBy;
+    private ServiceProvider serviceProvider;
+     private  VoucherSet voucherSet;
 
 
 }

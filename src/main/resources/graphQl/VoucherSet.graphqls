@@ -1,0 +1,24 @@
+type VoucherSet{
+    id:ID
+    name:String
+    description:String
+    voucherTypeSet:[VoucherType]
+
+
+}
+
+extend type Query {
+    voucherSetList:[VoucherSet]
+    voucherSetByName(name:String):VoucherSet
+}
+
+input VoucherSetInput{
+    name:String
+    description:String
+    voucherTypeSet:[ID]
+}
+
+extend type Mutation {
+    createVoucherSet(voucherSetInput:VoucherSetInput):VoucherSet
+    updateVoucherSet(voucherSetInput:VoucherSetInput,id:ID):VoucherSet
+}

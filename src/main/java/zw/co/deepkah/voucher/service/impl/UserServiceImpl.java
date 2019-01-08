@@ -56,18 +56,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
         return userRepository.save(user);
     }
 
-    @Override
-    public boolean duplicate(User user) {
-        System.out.println("--------------------------------------------------------------------");
-        User user1 = userRepository.findByEmailOrUsername(user.getEmail(),user.getUsername());
-        System.out.println("---------====================="+user.getEmail()+"============---"+user.getUsername());
-        if(user.getUsername().equals(user1.getUsername()) || user.getEmail().equals(user1.getEmail())){
-            System.out.println("error"+user.getUsername());
-            return true;
-        }
-        userRepository.save(user);
-        return false;
-    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
