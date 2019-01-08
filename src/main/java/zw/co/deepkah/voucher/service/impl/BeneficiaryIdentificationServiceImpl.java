@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-
 public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentificationService {
 
     private BeneficiaryIdentificationRepository beneficiaryIdentificationRepository;
@@ -53,6 +52,11 @@ public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentif
     }
 
     @Override
+    public boolean existsByIdentificationNumber(String identityNumber) {
+        return beneficiaryIdentificationRepository.existsByIdentificationNumber(identityNumber);
+    }
+
+    @Override
     public Optional<List<BeneficiaryIdentification>> findAll() {
         return Optional.ofNullable(beneficiaryIdentificationRepository.findAll());
     }
@@ -76,4 +80,6 @@ public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentif
     public BeneficiaryIdentification save(BeneficiaryIdentification beneficiaryIdentification) {
         return beneficiaryIdentificationRepository.save(beneficiaryIdentification);
     }
+
+
 }

@@ -17,6 +17,7 @@ public class UserMutationResolver implements GraphQLMutationResolver {
 
     public User createUser(UserDto userDto){
         User user = new User();
+
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setPassword(userDto.getPassword());

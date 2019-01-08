@@ -9,6 +9,7 @@ public class BeneficiaryAssessment extends BaseId {
    private Long povertyScore;
    private String latitude;
    private String longitude;
+   private Boolean sale = Boolean.FALSE;
 
 }
 

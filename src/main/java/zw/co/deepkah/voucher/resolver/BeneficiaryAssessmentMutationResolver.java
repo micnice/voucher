@@ -23,7 +23,20 @@ public class BeneficiaryAssessmentMutationResolver implements GraphQLMutationRes
         beneficiaryAssessment.setLongitude(beneficiaryAssessmentDto.getLongitude());
         beneficiaryAssessment.setPovertyScore(beneficiaryAssessmentDto.getPovertyScore());
         beneficiaryAssessment.setPregnancyStatus(beneficiaryAssessmentDto.getPregnancyStatus());
-        return beneficiaryAssessmentService.save(beneficiaryAssessment);
+
+        boolean beneficiaryIdentityExist = beneficiaryAssessmentService.existsByBeneficiaryIdentityId(beneficiaryAssessment.getBeneficiaryIdentityId());
+        if(!beneficiaryIdentityExist){
+
+            return beneficiaryAssessmentService.save(beneficiaryAssessment);
+        }else {
+            try {
+                throw new Exception("Beneficiary Identity Exists");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return beneficiaryAssessment;
+
     }
 
     public BeneficiaryAssessment updateBeneficiaryAssessment(BeneficiaryAssessmentDto beneficiaryAssessmentDto,Optional<String> baId){

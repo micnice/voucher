@@ -2,11 +2,9 @@ package zw.co.deepkah.voucher.document;
 
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.math.BigDecimal;
 import java.util.Set;
 
-@Document
+@Document(collection = "voucher_set")
 @Data
 public class VoucherSet extends BaseId {
 

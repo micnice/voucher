@@ -20,7 +20,7 @@ public interface IService<T> {
         void remove(T t);
         T save(T t);
 
-        default boolean duplicate(T t){
+        default boolean duplicateExists(T t){
             if(t.equals(t)){
                 return true;
             }

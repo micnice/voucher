@@ -61,7 +61,18 @@ public class PovertyBeneficiaryAssessmentToolMutationResolver implements GraphQL
         beneficiaryAssessment.setPovertyScore(povertyAssessmentTool.getTrueCount());
         beneficiaryAssessment.setPregnancyStatus(povertyBeneficiaryAssessmentTool.getPregnancyStatus());
         beneficiaryAssessment.setBeneficiaryIdentityId(povertyBeneficiaryAssessmentTool.getBeneficiaryIdentityId());
-        beneficiaryAssessmentService.save(beneficiaryAssessment);
+
+        boolean beneficiaryIdentityExists = beneficiaryAssessmentService.existsByBeneficiaryIdentityId(beneficiaryAssessment.getBeneficiaryIdentityId());
+        if(!beneficiaryIdentityExists){
+            beneficiaryAssessmentService.save(beneficiaryAssessment);
+        }else {
+            try {
+                throw new Exception("Beneficiary Identity already exists");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         //----------------------------------------------------------------------------------------
        return povertyBeneficiaryAssessmentTool;
 
