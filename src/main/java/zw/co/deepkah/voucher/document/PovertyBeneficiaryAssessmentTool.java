@@ -8,6 +8,7 @@ public class PovertyBeneficiaryAssessmentTool {
     private String beneficiaryIdentityId;
     private PregnancyStatus pregnancyStatus;
     private Long povertyScore;
+    private String dateAssessed;
     private String latitude;
     private String longitude;
     private Boolean pat1;
