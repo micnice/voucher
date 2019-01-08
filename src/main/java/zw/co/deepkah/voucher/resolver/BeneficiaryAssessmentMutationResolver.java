@@ -1,6 +1,7 @@
 package zw.co.deepkah.voucher.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import graphql.GraphQLException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import zw.co.deepkah.voucher.document.BeneficiaryAssessment;
@@ -30,7 +31,7 @@ public class BeneficiaryAssessmentMutationResolver implements GraphQLMutationRes
             return beneficiaryAssessmentService.save(beneficiaryAssessment);
         }else {
             try {
-                throw new Exception("Beneficiary Identity Exists");
+                throw new GraphQLException("Beneficiary Identity Exists");
             } catch (Exception e) {
                 e.printStackTrace();
             }

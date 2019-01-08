@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import zw.co.deepkah.voucher.document.Sales;
 import zw.co.deepkah.voucher.service.SalesService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,15 @@ public class SalesQueryResolver implements GraphQLQueryResolver {
 
     public Sales getSaleByVoucherSerialNumber(String voucherSerialNumber){
      return salesService.findByVoucherSerialNumber(voucherSerialNumber);
+    }
+
+    public List<Sales> salesByBeneficiaryIdentityId(Optional<String> beneficiaryIdentityId){
+
+       List<Sales> salesList = new ArrayList<>();
+        if(beneficiaryIdentityId.isPresent()){
+            salesList= salesService.findAllByBeneficiaryIdentityId(beneficiaryIdentityId.get());
+            }
+        return salesList;
     }
 
 

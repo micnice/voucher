@@ -3,17 +3,27 @@ type Sales{
     voucherSerialNumber:String
     saleDate:String
     soldBy:String
+    beneficiaryIdentityId:ID
+    serviceProvider:ServiceProvider
+    voucherSet:VoucherSet
+
+
 }
 
 extend type Query {
     saleById(id:ID):Sales
     salesList:[Sales]
     saleByVoucherSerialNumber(voucherSerialNumber:String):Sales
+    salesByBeneficiaryIdentityId(beneficiaryIdentityId:ID):[Sales]
+
 }
 input SalesInput{
     voucherSerialNumber:String
     saleDate:String
     soldBy:String
+    beneficiaryIdentityId:ID
+    serviceProvider:ID
+    voucherSet:ID
 }
 extend type Mutation {
     updateSales(salesInput:SalesInput,id:ID):Sales
