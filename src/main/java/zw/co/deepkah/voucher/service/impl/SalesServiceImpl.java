@@ -44,4 +44,9 @@ public class SalesServiceImpl implements SalesService {
     public Sales findByVoucherSerialNumber(String voucherSerialNumber) {
         return salesRepository.findByVoucherSerialNumber(voucherSerialNumber);
     }
+
+    @Override
+    public List<Sales> findAllByBeneficiaryIdentityId(String beneficiaryIdentityId) {
+        return salesRepository.findAllByBeneficiaryIdentityId(beneficiaryIdentityId);
+    }
 }

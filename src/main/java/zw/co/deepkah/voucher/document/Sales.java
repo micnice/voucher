@@ -14,7 +14,7 @@ public class Sales extends BaseId {
     private LocalDate saleDate;
     private String soldBy;
     private ServiceProvider serviceProvider;
-     private  VoucherSet voucherSet;
+    private  VoucherSet voucherSet;
 
 
 }

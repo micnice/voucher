@@ -1,6 +1,7 @@
 package zw.co.deepkah.voucher.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import graphql.GraphQLException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import zw.co.deepkah.voucher.document.BeneficiaryIdentification;
@@ -38,7 +39,7 @@ public class BeneficiaryIdentificationMutationResolver implements GraphQLMutatio
                }
                else {
                    try {
-                       throw new Exception("Duplicate record");
+                       throw new GraphQLException("Duplicate record");
                    } catch (Exception e) {
                        e.printStackTrace();
                    }

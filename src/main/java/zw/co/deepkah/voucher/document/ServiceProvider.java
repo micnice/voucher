@@ -12,5 +12,7 @@ public class ServiceProvider extends BaseId {
     private String description;
     private City city;
 
-
+    public ServiceProvider(String id) {
+        super(id);
+    }
 }
