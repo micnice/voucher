@@ -40,7 +40,7 @@ public class PovertyBeneficiaryAssessmentToolMutationResolver implements GraphQL
         povertyAssessmentTool.setPat9(povertyBeneficiaryAssessmentTool.getPat9());
         povertyAssessmentTool.setPat10(povertyBeneficiaryAssessmentTool.getPat10());
         povertyAssessmentTool.setPat11(povertyBeneficiaryAssessmentTool.getPat11());
-        povertyAssessmentTool.setDateAssesed(DateFormatter.getDateFromString(povertyBeneficiaryAssessmentTool.getDateAssessed()));
+        //povertyAssessmentTool.setDateAssesed(DateFormatter.getDateFromString(povertyBeneficiaryAssessmentTool.getDateAssessed()));
 
         Boolean [] pat = {povertyAssessmentTool.getPat1(),povertyAssessmentTool.getPat2(),
                 povertyAssessmentTool.getPat3(),

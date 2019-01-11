@@ -8,6 +8,7 @@ import zw.co.deepkah.voucher.document.BeneficiaryIdentification;
 import zw.co.deepkah.voucher.service.BeneficiaryIdentificationService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -41,5 +42,10 @@ public class BeneficiaryIdentificationQueryResolver implements GraphQLQueryResol
        public List<BeneficiaryIdentification> getIdentificationNotAssessed(){
 
         return beneficiaryIdentificationService.getIdentificationNotAssessed();
+       }
+
+       public List<BeneficiaryIdentification> getIdentificationAssessedAndPassed(){
+
+        return beneficiaryIdentificationService.getIdentificationAssessedAndPassed();
        }
 }
