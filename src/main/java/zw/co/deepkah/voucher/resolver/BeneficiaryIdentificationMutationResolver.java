@@ -8,7 +8,6 @@ import zw.co.deepkah.voucher.document.BeneficiaryIdentification;
 import zw.co.deepkah.voucher.dto.BeneficiaryIdentificationDto;
 import zw.co.deepkah.voucher.service.BeneficiaryIdentificationService;
 import zw.co.deepkah.voucher.util.DateFormatter;
-
 import java.util.Optional;
 
 @Component
@@ -48,10 +47,11 @@ public class BeneficiaryIdentificationMutationResolver implements GraphQLMutatio
     }
 
 
-    public BeneficiaryIdentification updateBeneficiaryIdentification(BeneficiaryIdentificationDto beneficiaryIdentificationDto, Optional<String> benficiaryIdentityId){
+    public BeneficiaryIdentification updateBeneficiaryIdentification(BeneficiaryIdentificationDto beneficiaryIdentificationDto, Optional<String> beneficiaryIdentityId){
         BeneficiaryIdentification beneficiaryIdentification = new BeneficiaryIdentification();
-        if(benficiaryIdentityId.isPresent()){
-            beneficiaryIdentification = beneficiaryIdentificationService.getOne(benficiaryIdentityId.get()).get();
+
+        if(beneficiaryIdentityId.isPresent()){
+            beneficiaryIdentification = beneficiaryIdentificationService.getOne(beneficiaryIdentityId.get()).get();
             beneficiaryIdentification.setFirstName(beneficiaryIdentificationDto.getFirstName());
             beneficiaryIdentification.setLastName(beneficiaryIdentificationDto.getLastName());
             beneficiaryIdentification.setBirthDate(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getBirthDate()));
@@ -65,6 +65,7 @@ public class BeneficiaryIdentificationMutationResolver implements GraphQLMutatio
             beneficiaryIdentification.setMaritalStatus(beneficiaryIdentificationDto.getMaritalStatus());
 
         }
+
      return beneficiaryIdentificationService.save(beneficiaryIdentification);
     }
 

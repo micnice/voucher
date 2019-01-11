@@ -12,5 +12,4 @@ public class VoucherSet extends BaseId {
    private String description;
    private Set<VoucherType> voucherTypeSet;
 
-
 }
