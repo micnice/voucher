@@ -1,10 +1,15 @@
 package zw.co.deepkah.voucher.service.impl;
 
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import zw.co.deepkah.voucher.document.BeneficiaryAssessment;
 import zw.co.deepkah.voucher.document.BeneficiaryIdentification;
+import zw.co.deepkah.voucher.repository.BeneficiaryAssessmentRepository;
 import zw.co.deepkah.voucher.repository.BeneficiaryIdentificationRepository;
+import zw.co.deepkah.voucher.service.BeneficiaryAssessmentService;
 import zw.co.deepkah.voucher.service.BeneficiaryIdentificationService;
 
 import java.io.IOException;
@@ -14,13 +19,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentificationService {
 
     private BeneficiaryIdentificationRepository beneficiaryIdentificationRepository;
+    @Autowired
+    private BeneficiaryAssessmentService beneficiaryAssessmentService;
+    @Autowired
+    BeneficiaryAssessmentRepository beneficiaryAssessmentRepository;
 
 
     public BeneficiaryIdentificationServiceImpl(BeneficiaryIdentificationRepository beneficiaryIdentificationRepository) {
@@ -54,6 +65,19 @@ public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentif
     @Override
     public boolean existsByIdentificationNumber(String identityNumber) {
         return beneficiaryIdentificationRepository.existsByIdentificationNumber(identityNumber);
+    }
+
+    @Override
+    public List<BeneficiaryIdentification> getIdentificationAssessedAndPassed() {
+        List<BeneficiaryIdentification> assessedBeneficiaries = beneficiaryIdentificationRepository.findByIsAssessedIsTrue();
+
+        List<BeneficiaryIdentification> passedBeneficiaries = assessedBeneficiaries.stream().filter(b->
+                (beneficiaryAssessmentService.findByBeneficiaryIdentityId(b.getId())!=null
+                &&beneficiaryAssessmentService.findByBeneficiaryIdentityId(b.getId()).getPovertyScore()>=3)).collect(Collectors.toList());
+    passedBeneficiaries.stream().forEach(b->{
+        b.setPovertyScore(beneficiaryAssessmentService.findByBeneficiaryIdentityId(b.getId()).getPovertyScore());
+    });
+     return  passedBeneficiaries;
     }
 
     @Override

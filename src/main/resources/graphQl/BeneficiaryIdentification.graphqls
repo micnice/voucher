@@ -12,6 +12,7 @@ type BeneficiaryIdentification{
     longitude:String
     isAssessed:Boolean
     dataCollectionDate:String
+    povertyScore:Long
 }
 
 type Query {
@@ -20,6 +21,7 @@ type Query {
     trackBeneficiary(identificationNumber:String,firstName:String,lastName:String):[BeneficiaryIdentification]
     identificationList:[BeneficiaryIdentification]
     identificationNotAssessed:[BeneficiaryIdentification]
+    identificationAssessedAndPassed:[BeneficiaryIdentification]
 }
 
 input BeneficiaryIdentificationInput{
