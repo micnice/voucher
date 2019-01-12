@@ -14,6 +14,7 @@ import zw.co.deepkah.voucher.util.DateFormatter;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @AllArgsConstructor
@@ -28,10 +29,8 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
         Sales sales = new Sales();
         sales.setSaleDate(DateFormatter.getDateFromString(salesDto.getSaleDate()));
         sales.setSoldBy(salesDto.getSoldBy());
-        sales.setVoucherSerialNumber(salesDto.getVoucherSerialNumber());
+        sales.setVoucherSerialNumber(UUID.randomUUID().toString());
         sales.setBeneficiaryIdentityId(salesDto.getBeneficiaryIdentityId());
-        ServiceProvider serviceProvider=serviceProviderService.getOne(salesDto.getServiceProviderId()).get();
-        sales.setServiceProvider(serviceProvider);
         VoucherSet voucherSet = voucherSetService.getOne(salesDto.getVoucherSetId()).get();
 
         sales.setVoucherSet(voucherSet);
@@ -47,8 +46,6 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
             sales.setSoldBy(salesDto.getSoldBy());
             sales.setVoucherSerialNumber(salesDto.getVoucherSerialNumber());
             sales.setBeneficiaryIdentityId(salesDto.getBeneficiaryIdentityId());
-            ServiceProvider serviceProvider=serviceProviderService.getOne(salesDto.getServiceProviderId()).get();
-            sales.setServiceProvider(serviceProvider);
             VoucherSet voucherSet = voucherSetService.getOne(salesDto.getVoucherSetId()).get();
             sales.setVoucherSet(voucherSet);
         });

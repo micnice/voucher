@@ -4,7 +4,6 @@ type Sales{
     saleDate:String
     soldBy:String
     beneficiaryIdentityId:ID
-    serviceProvider:ServiceProvider
     voucherSet:VoucherSet
 
 
@@ -22,7 +21,6 @@ input SalesInput{
     saleDate:String
     soldBy:String
     beneficiaryIdentityId:ID
-    serviceProvider:ID
     voucherSet:ID
 }
 extend type Mutation {

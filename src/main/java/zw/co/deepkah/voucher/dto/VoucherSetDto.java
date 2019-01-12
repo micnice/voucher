@@ -10,5 +10,5 @@ public class VoucherSetDto {
 
     private String name;
     private String description;
-    private Set<String> voucherTypeSetIds;
+    private Set<String> voucherTypeSet;
 }
