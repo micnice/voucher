@@ -14,6 +14,5 @@ public class SalesDto {
     private String voucherSerialNumber;
     private String saleDate;
     private String soldBy;
-    private String serviceProviderId;
     private String voucherSetId;
 }

@@ -13,7 +13,6 @@ public class Sales extends BaseId {
     private String voucherSerialNumber;
     private LocalDate saleDate;
     private String soldBy;
-    private ServiceProvider serviceProvider;
     private  VoucherSet voucherSet;
 
 

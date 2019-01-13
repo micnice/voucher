@@ -1,4 +1,5 @@
 type VoucherType{
+     id:ID
     name:String
     description:String
     levelId:ID
