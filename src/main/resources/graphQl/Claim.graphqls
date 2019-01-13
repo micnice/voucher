@@ -1,0 +1,13 @@
+type Claim{
+    facility:Facility
+    beneficiaryIdentification:BeneficiaryIdentification
+    voucherType:VoucherType
+    sales:Sale
+}
+
+
+extend type Query {
+    claimList:[Claim]
+    findByBeneficiaryId(beneficiaryIdentification:ID):[Claim]
+}
+
