@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "claim")
 @NoArgsConstructor
 public class Claim extends BaseId {
-            private Facility facility;
+            private ServiceProvider serviceProvider;
             private BeneficiaryIdentification beneficiaryIdentification;
             private VoucherType voucherType;
             private Sales sales;
