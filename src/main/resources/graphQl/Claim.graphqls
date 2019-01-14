@@ -1,9 +1,9 @@
 type Claim{
     id:ID
-    facility:Facility
     beneficiaryIdentification:BeneficiaryIdentification
     voucherType:VoucherType
     sales:Sales
+    serviceProvider:ServiceProvider
 }
 
 
@@ -12,10 +12,10 @@ extend type Query {
     findByBeneficiaryId(beneficiaryIdentification:ID):[Claim]
 }
 input ClaimInput{
-    facility:ID
     beneficiaryIdentification:ID
     voucherType:ID
     sales:ID
+    serviceProvider:ID
 
 }
 extend type Mutation{
