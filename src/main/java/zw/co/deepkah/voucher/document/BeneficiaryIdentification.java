@@ -26,6 +26,10 @@ public class BeneficiaryIdentification extends BaseId {
     private LocalDate dataCollectionDate;
     private Long povertyScore;
 
+    public BeneficiaryIdentification(String id) {
+        super(id);
+    }
+
     @Transient
     public Long getPovertyScore() {
         return povertyScore;

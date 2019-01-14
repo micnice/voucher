@@ -1,0 +1,20 @@
+type Facility{
+    id:ID
+    name:String
+    description:String
+}
+
+extend type Query {
+    facilityList:[Facility]
+    findByName(name:String):Facility
+}
+
+input FacilityInput{
+    name:String
+    description:String
+}
+
+extend type Mutation {
+    createFacility(facilityInput:FacilityInput):Facility
+    updateFacility(facilityInput:FacilityInput,id:ID):Facility
+}

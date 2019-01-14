@@ -1,13 +1,25 @@
 type Claim{
+    id:ID
     facility:Facility
     beneficiaryIdentification:BeneficiaryIdentification
     voucherType:VoucherType
-    sales:Sale
+    sales:Sales
 }
 
 
 extend type Query {
     claimList:[Claim]
     findByBeneficiaryId(beneficiaryIdentification:ID):[Claim]
+}
+input ClaimInput{
+    facility:ID
+    beneficiaryIdentification:ID
+    voucherType:ID
+    sales:ID
+
+}
+extend type Mutation{
+    createClaim(claimInput:ClaimInput):Claim
+    updateClaim(claimInput:ClaimInput,id:ID):Claim
 }
 

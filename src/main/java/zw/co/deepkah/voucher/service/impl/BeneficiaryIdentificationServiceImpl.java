@@ -7,6 +7,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import zw.co.deepkah.voucher.document.BeneficiaryAssessment;
 import zw.co.deepkah.voucher.document.BeneficiaryIdentification;
+import zw.co.deepkah.voucher.document.Facility;
 import zw.co.deepkah.voucher.repository.BeneficiaryAssessmentRepository;
 import zw.co.deepkah.voucher.repository.BeneficiaryIdentificationRepository;
 import zw.co.deepkah.voucher.service.BeneficiaryAssessmentService;
@@ -25,22 +26,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentificationService {
 
     private BeneficiaryIdentificationRepository beneficiaryIdentificationRepository;
-    @Autowired
     private BeneficiaryAssessmentService beneficiaryAssessmentService;
-    @Autowired
-    BeneficiaryAssessmentRepository beneficiaryAssessmentRepository;
 
-
-    public BeneficiaryIdentificationServiceImpl(BeneficiaryIdentificationRepository beneficiaryIdentificationRepository) {
-        this.beneficiaryIdentificationRepository = beneficiaryIdentificationRepository;
-
-
-    }
-
-    @Override
+ @Override
     public BeneficiaryIdentification findByIdentificationNumber(String identityNumber) {
         return beneficiaryIdentificationRepository.findByIdentificationNumber(identityNumber);
     }
@@ -86,7 +78,7 @@ public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentif
     }
 
     @Override
-    public Optional<BeneficiaryIdentification> getOne(String Id) {
+    public Optional<BeneficiaryIdentification>  getOne(String Id) {
         return Optional.ofNullable(beneficiaryIdentificationRepository.findById(Id).get());
     }
 

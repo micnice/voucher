@@ -16,6 +16,10 @@ public interface IService<T> {
         }
         Optional<List<T>> findAll();
         Optional<T> getOne(String Id);
+        default T findOne(String id){
+            T t = null;
+            return t;
+        };
         void removeById(String Id);
         void remove(T t);
         T save(T t);

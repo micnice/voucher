@@ -2,6 +2,7 @@ package zw.co.deepkah.voucher.service.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import zw.co.deepkah.voucher.document.BeneficiaryIdentification;
 import zw.co.deepkah.voucher.document.Claim;
 import zw.co.deepkah.voucher.repository.ClaimRepository;
 import zw.co.deepkah.voucher.service.ClaimService;
@@ -40,8 +41,9 @@ public class ClaimServiceImpl implements ClaimService {
         return claimRepository.save(claim);
     }
 
+
     @Override
-    public List<Claim> findByBeneficiaryId(String beneficiaryId) {
-        return claimRepository.findByBeneficiaryId(beneficiaryId);
+    public List<Claim> findByBeneficiaryIdentification(BeneficiaryIdentification beneficiaryIdentification) {
+        return claimRepository.findByBeneficiaryIdentification(beneficiaryIdentification);
     }
 }

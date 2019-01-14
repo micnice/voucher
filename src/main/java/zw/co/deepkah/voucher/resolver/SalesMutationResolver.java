@@ -31,7 +31,7 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
         sales.setSoldBy(salesDto.getSoldBy());
         sales.setVoucherSerialNumber(UUID.randomUUID().toString());
         sales.setBeneficiaryIdentityId(salesDto.getBeneficiaryIdentityId());
-        VoucherSet voucherSet = voucherSetService.getOne(salesDto.getVoucherSetId()).get();
+        VoucherSet voucherSet = voucherSetService.getOne(salesDto.getVoucherSet()).get();
 
         sales.setVoucherSet(voucherSet);
         return salesService.save(sales);
@@ -46,7 +46,7 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
             sales.setSoldBy(salesDto.getSoldBy());
             sales.setVoucherSerialNumber(salesDto.getVoucherSerialNumber());
             sales.setBeneficiaryIdentityId(salesDto.getBeneficiaryIdentityId());
-            VoucherSet voucherSet = voucherSetService.getOne(salesDto.getVoucherSetId()).get();
+            VoucherSet voucherSet = voucherSetService.getOne(salesDto.getVoucherSet()).get();
             sales.setVoucherSet(voucherSet);
         });
 
