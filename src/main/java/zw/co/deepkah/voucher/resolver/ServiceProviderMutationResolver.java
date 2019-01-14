@@ -25,10 +25,7 @@ public class ServiceProviderMutationResolver implements GraphQLMutationResolver 
         ServiceProvider serviceProvider= new ServiceProvider();
         serviceProvider.setName(serviceProviderDto.getName());
         serviceProvider.setDescription(serviceProviderDto.getDescription());
-//        serviceProvider.setCity(new City(serviceProviderDto.getCityId()));
         serviceProvider.setCity(cityService.getOne(serviceProviderDto.getCityId()).get());
-
-        System.out.println("pppppppppppppppp===="+serviceProvider.getCity().getId());
         return serviceProviderService.save(serviceProvider);
     }
 
@@ -38,11 +35,11 @@ public class ServiceProviderMutationResolver implements GraphQLMutationResolver 
 
         serviceProvider.setCity(cityService.getOne(serviceProviderDto.getCityId()).get());
         serviceProviderId.ifPresent(s -> {
-
+                 city.equals(cityService.getOne(serviceProviderDto.getCityId()).get());
             serviceProvider.setId(serviceProviderService.getOne(s).get().getId());
             serviceProvider.setName(serviceProviderDto.getName());
             serviceProvider.setDescription(serviceProviderDto.getDescription());
-            serviceProvider.setCity(cityService.getOne(serviceProviderDto.getCityId()).get());
+            serviceProvider.setCity(city);
 
 
 
