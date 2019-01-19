@@ -40,7 +40,7 @@ public class PovertyBeneficiaryAssessmentToolMutationResolver implements GraphQL
         povertyAssessmentTool.setPat9(povertyBeneficiaryAssessmentTool.getPat9());
         povertyAssessmentTool.setPat10(povertyBeneficiaryAssessmentTool.getPat10());
         povertyAssessmentTool.setPat11(povertyBeneficiaryAssessmentTool.getPat11());
-        //povertyAssessmentTool.setDateAssesed(DateFormatter.getDateFromString(povertyBeneficiaryAssessmentTool.getDateAssessed()));
+        povertyAssessmentTool.setDateAssesed(DateFormatter.getDateFromString(povertyBeneficiaryAssessmentTool.getDateAssessed()));
 
         Boolean [] pat = {povertyAssessmentTool.getPat1(),povertyAssessmentTool.getPat2(),
                 povertyAssessmentTool.getPat3(),
@@ -69,7 +69,7 @@ public class PovertyBeneficiaryAssessmentToolMutationResolver implements GraphQL
 
         boolean beneficiaryIdentityExists = beneficiaryAssessmentService.existsByBeneficiaryIdentityId(beneficiaryAssessment.getBeneficiaryIdentityId());
         if(!beneficiaryIdentityExists){
-            beneficiaryAssessmentService.save(beneficiaryAssessment);
+             beneficiaryAssessmentService.save(beneficiaryAssessment);
         }else {
             try {
                 throw new Exception("Beneficiary Identity already exists");
@@ -84,6 +84,9 @@ public class PovertyBeneficiaryAssessmentToolMutationResolver implements GraphQL
         BeneficiaryIdentification beneficiaryIdentification
                 = beneficiaryIdentificationService.getOne(povertyAssessmentTool.getBeneficiaryIdentityId()).get();
         beneficiaryIdentification.setIsAssessed(Boolean.TRUE);
+        if(povertyAssessmentTool.getTrueCount()<3){
+            beneficiaryIdentification.setReAssess(Boolean.TRUE);
+        }
        beneficiaryIdentificationService.save(beneficiaryIdentification);
 
        return povertyBeneficiaryAssessmentTool;

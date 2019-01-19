@@ -3,15 +3,9 @@ package zw.co.deepkah.voucher.resolver;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import zw.co.deepkah.voucher.document.BeneficiaryAssessment;
-import zw.co.deepkah.voucher.document.Sales;
-import zw.co.deepkah.voucher.document.ServiceProvider;
-import zw.co.deepkah.voucher.document.VoucherSet;
+import zw.co.deepkah.voucher.document.*;
 import zw.co.deepkah.voucher.dto.SalesDto;
-import zw.co.deepkah.voucher.service.BeneficiaryAssessmentService;
-import zw.co.deepkah.voucher.service.SalesService;
-import zw.co.deepkah.voucher.service.ServiceProviderService;
-import zw.co.deepkah.voucher.service.VoucherSetService;
+import zw.co.deepkah.voucher.service.*;
 import zw.co.deepkah.voucher.util.DateFormatter;
 
 import java.time.LocalDate;
@@ -26,6 +20,8 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
     private ServiceProviderService serviceProviderService;
     private VoucherSetService voucherSetService;
     private BeneficiaryAssessmentService beneficiaryAssessmentService;
+    private BeneficiaryIdentificationService beneficiaryIdentificationService;
+    private ClaimService claimService;
 
 
     public Sales createSales(SalesDto salesDto){
@@ -37,9 +33,26 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
         VoucherSet voucherSet = voucherSetService.getOne(salesDto.getVoucherSet()).get();
         sales.setVoucherSet(voucherSet);
         Sales savedSale= salesService.save(sales);
+
         BeneficiaryAssessment ba = beneficiaryAssessmentService.findByBeneficiaryIdentityId(savedSale.getBeneficiaryIdentityId());
         ba.setSale(Boolean.TRUE);
         beneficiaryAssessmentService.save(ba);
+        BeneficiaryIdentification bi = beneficiaryIdentificationService.findOne(salesDto.getBeneficiaryIdentityId());
+
+        try {
+            for(VoucherType voucherType:voucherSet.getVoucherTypeSet()) {
+                System.out.println("%%%%---"+voucherSet.getVoucherTypeSet().size());
+                System.out.println("%%%%--ID ID-"+voucherType.getId());
+                Claim claim = new Claim();
+                claim.setSales(savedSale);
+                claim.setVoucherType(voucherType);
+                claim.setBeneficiaryIdentification(bi);
+                claimService.save(claim);
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
         return savedSale;
     }
 

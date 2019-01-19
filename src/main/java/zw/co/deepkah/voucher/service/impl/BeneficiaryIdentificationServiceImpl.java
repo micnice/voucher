@@ -51,7 +51,7 @@ public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentif
 
     @Override
     public List<BeneficiaryIdentification> getIdentificationNotAssessed() {
-        return beneficiaryIdentificationRepository.findByIsAssessedIsFalse();
+        return beneficiaryIdentificationRepository.findByIsAssessedIsFalseOrReAssessIsTrue();
     }
 
     @Override
