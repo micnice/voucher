@@ -34,7 +34,7 @@ public class BeneficiaryIdentificationQueryResolver implements GraphQLQueryResol
        }
 
 
-       public  List<BeneficiaryIdentification> getIdentificationList(){
+       public  List<BeneficiaryIdentification> getBeneficiaryIdentificationList(){
 
         return beneficiaryIdentificationService.findAll().get();
        }

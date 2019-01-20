@@ -12,23 +12,35 @@ import zw.co.deepkah.voucher.service.VoucherTypeService;
 import java.util.*;
 
 @Component
-@AllArgsConstructor
+
 public class VoucherSetMutationResolver implements GraphQLMutationResolver {
 
     private VoucherSetService voucherSetService;
     private  VoucherTypeService voucherTypeService;
+    private VoucherType voucherType;
 
+    public VoucherSetMutationResolver(VoucherSetService voucherSetService, VoucherTypeService voucherTypeService) {
+        this.voucherSetService = voucherSetService;
+        this.voucherTypeService = voucherTypeService;
+    }
 
     public VoucherSet createVoucherSet(VoucherSetDto voucherSetDto){
         VoucherSet voucherSet = new VoucherSet();
         Set<VoucherType>  voucherTypeSet = new HashSet<>();
+
         voucherSet.setName(voucherSetDto.getName());
         voucherSet.setDescription(voucherSetDto.getDescription());
-        voucherSetDto.getVoucherTypeSet().stream().forEach(voucherTypeSetId -> {
-            voucherTypeSet.add(new VoucherType(voucherTypeSetId));
+
+        voucherSetDto.getVoucherTypeSet().stream().forEach(s -> {
+           voucherType = voucherTypeService.getOne(s).get();
+            voucherTypeSet.add(voucherType);
         });
 
+        System.out.println("------"+voucherTypeSet+"------------");
         voucherSet.setVoucherTypeSet(voucherTypeSet);
+
+
+
         return voucherSetService.save(voucherSet);
     }
 

@@ -10,6 +10,6 @@ public class VoucherTypeDto {
 
     private String name;
     private String description;
-    private String levelId;
+    private String level;
     private BigDecimal price;
 }

@@ -25,6 +25,7 @@ public class BeneficiaryIdentification extends BaseId {
     private Boolean isAssessed = Boolean.FALSE;
     private LocalDate dataCollectionDate;
     private Long povertyScore;
+    private Boolean reassess = Boolean.FALSE;
 
     public BeneficiaryIdentification(String id) {
         super(id);

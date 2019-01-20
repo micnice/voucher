@@ -1,8 +1,8 @@
 type VoucherType{
-     id:ID
+    id:ID
     name:String
     description:String
-    levelId:ID
+    level:Level
     price:BigDecimal
 
 }
@@ -15,7 +15,7 @@ extend type Query {
 input VoucherTypeInput{
     name:String
     description:String
-    levelId:ID
+    level:ID
     price:BigDecimal
 }
 

@@ -13,7 +13,7 @@ public class VoucherType extends BaseId {
 
     private String name;
     private String description;
-    private String levelId;
+    private Level level;
     private BigDecimal price;
 
 

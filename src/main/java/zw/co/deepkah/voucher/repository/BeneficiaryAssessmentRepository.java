@@ -9,8 +9,7 @@ import java.util.List;
 public interface BeneficiaryAssessmentRepository extends MongoRepository<BeneficiaryAssessment,String> {
 
     BeneficiaryAssessment getByBeneficiaryIdentityId(String beneficiaryIdentityId);
-
-    List<BeneficiaryAssessment> findAllByBeneficiaryIdentityId();
-
     boolean existsByBeneficiaryIdentityId(String beneficiaryIdentityId);
+
+
 }

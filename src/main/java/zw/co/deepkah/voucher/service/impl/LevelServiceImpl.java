@@ -15,6 +15,11 @@ public class LevelServiceImpl implements LevelService {
     private LevelRepository levelRepository;
 
     @Override
+    public Level findByName(String name) {
+        return levelRepository.findByName(name);
+    }
+
+    @Override
     public Optional<List<Level>> findAll() {
         return Optional.ofNullable(levelRepository.findAll());
     }

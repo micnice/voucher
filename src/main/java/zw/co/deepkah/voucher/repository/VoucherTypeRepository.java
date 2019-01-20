@@ -5,4 +5,5 @@ import zw.co.deepkah.voucher.document.VoucherType;
 
 public interface VoucherTypeRepository extends MongoRepository<VoucherType,String> {
     VoucherType findByName(String name);
+
 }
