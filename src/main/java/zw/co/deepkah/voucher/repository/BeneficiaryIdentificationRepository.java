@@ -11,7 +11,7 @@ public interface BeneficiaryIdentificationRepository extends MongoRepository<Ben
     BeneficiaryIdentification findByIdentificationNumber(String identityNumber);
     List<BeneficiaryIdentification> findAllByLmp(LocalDate localDate);
     List<BeneficiaryIdentification> findByIdentificationNumberLikeOrFirstNameLikeOrLastNameLike(String identificationNumber,String firstName,String lastName);
-    List<BeneficiaryIdentification> findByIsAssessedIsFalse();
+    List<BeneficiaryIdentification> findByIsAssessedIsFalseOrReAssessIsTrue();
     boolean existsByIdentificationNumber(String identityNumber);
     List<BeneficiaryIdentification> findByIsAssessedIsTrue();
 

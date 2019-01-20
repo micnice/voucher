@@ -12,6 +12,7 @@ public class Claim extends BaseId {
             private BeneficiaryIdentification beneficiaryIdentification;
             private VoucherType voucherType;
             private Sales sales;
+            private Boolean redeemed = Boolean.FALSE;
 
     public Claim(String id) {
         super(id);

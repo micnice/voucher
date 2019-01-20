@@ -51,7 +51,7 @@ public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentif
 
     @Override
     public List<BeneficiaryIdentification> getIdentificationNotAssessed() {
-        return beneficiaryIdentificationRepository.findByIsAssessedIsFalse();
+        return beneficiaryIdentificationRepository.findByIsAssessedIsFalseOrReAssessIsTrue();
     }
 
     @Override
@@ -65,7 +65,8 @@ public class BeneficiaryIdentificationServiceImpl  implements BeneficiaryIdentif
 
         List<BeneficiaryIdentification> passedBeneficiaries = assessedBeneficiaries.stream().filter(b->
                 (beneficiaryAssessmentService.findByBeneficiaryIdentityId(b.getId())!=null
-                &&beneficiaryAssessmentService.findByBeneficiaryIdentityId(b.getId()).getPovertyScore()>=3)).collect(Collectors.toList());
+                &&beneficiaryAssessmentService.findByBeneficiaryIdentityId(b.getId()).getPovertyScore()>=3)
+        &&!beneficiaryAssessmentService.findByBeneficiaryIdentityId(b.getId()).getSale()).collect(Collectors.toList());
     passedBeneficiaries.stream().forEach(b->{
         b.setPovertyScore(beneficiaryAssessmentService.findByBeneficiaryIdentityId(b.getId()).getPovertyScore());
     });
