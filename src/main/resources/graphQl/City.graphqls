@@ -15,7 +15,7 @@ input CityInput{
     description:String
 }
 
- extend type Mutation {
+type Mutation {
      createCity(cityInput:CityInput):City
      updateCity(cityInput:CityInput,id:ID):City
 }

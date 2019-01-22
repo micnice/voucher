@@ -14,8 +14,7 @@ type BeneficiaryIdentification{
     dataCollectionDate:String
     povertyScore:Long
 }
-
-type Query {
+extend type Query {
     lMPList(lmp:String):[BeneficiaryIdentification]
     byIdentificationNumber(identificationNumber:String):BeneficiaryIdentification
     trackBeneficiary(identificationNumber:String,firstName:String,lastName:String):[BeneficiaryIdentification]
@@ -38,7 +37,7 @@ input BeneficiaryIdentificationInput{
     dataCollectionDate:String
 }
 
-type Mutation {
+extend type Mutation {
     createBeneficiaryIdentification(beneficiaryIdentificationInput:BeneficiaryIdentificationInput):BeneficiaryIdentification
     updateBeneficiaryIdentification(beneficiaryIdentificationInput:BeneficiaryIdentificationInput,id:ID):BeneficiaryIdentification
 }

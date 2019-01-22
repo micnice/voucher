@@ -1,5 +1,4 @@
 type SaleIdentificationData{
-
     beneficiaryIdentityId:String
     identificationNumber:String
     saleId:String
