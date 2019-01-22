@@ -41,8 +41,6 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
 
         try {
             for(VoucherType voucherType:voucherSet.getVoucherTypeSet()) {
-                System.out.println("%%%%---"+voucherSet.getVoucherTypeSet().size());
-                System.out.println("%%%%--ID ID-"+voucherType.getId());
                 Claim claim = new Claim();
                 claim.setSales(savedSale);
                 claim.setVoucherType(voucherType);

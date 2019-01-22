@@ -36,7 +36,6 @@ public class VoucherSetMutationResolver implements GraphQLMutationResolver {
             voucherTypeSet.add(voucherType);
         });
 
-        System.out.println("------"+voucherTypeSet+"------------");
         voucherSet.setVoucherTypeSet(voucherTypeSet);
 
 

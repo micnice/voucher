@@ -21,7 +21,6 @@ public class ServiceProviderMutationResolver implements GraphQLMutationResolver 
 
 
     public ServiceProvider createServiceProvider(ServiceProviderDto serviceProviderDto){
-        System.out.println("------------------"+serviceProviderDto.getCityId());
         ServiceProvider serviceProvider= new ServiceProvider();
         serviceProvider.setName(serviceProviderDto.getName());
         serviceProvider.setDescription(serviceProviderDto.getDescription());

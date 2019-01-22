@@ -24,7 +24,7 @@ type PovertyBeneficiaryAssessmentTool{
 input PovertyBeneficiaryAssessmentToolInput{
     #---------------------------------------------------------
     beneficiaryIdentityId:String
-    pregnancyStatus:PregnancyStatus
+    saleId:String
     latitude:String
     longitude:String
     dateAssessed:String
