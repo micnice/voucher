@@ -57,8 +57,11 @@ public class PovertyBeneficiaryAssessmentToolMutationResolver implements GraphQL
         povertyAssessmentTool.setFalseCount(falseCount);
         povertyAssessmentTool.setTrueCount(trueCount);
 
-
-        povertyAssessmentToolService.save(povertyAssessmentTool);
+        try {
+            povertyAssessmentToolService.save(povertyAssessmentTool);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
 
         //------------------------------------------------------------------------------------------
         beneficiaryAssessment.setLatitude(povertyBeneficiaryAssessmentTool.getLatitude());
