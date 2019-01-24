@@ -4,12 +4,14 @@ type Claim{
     voucherType:VoucherType
     sales:Sales
     serviceProvider:ServiceProvider
+    redeemed:Boolean
 }
 
 
 extend type Query {
     claimList:[Claim]
     findByBeneficiaryId(beneficiaryIdentification:ID):[Claim]
+    claimsBySaleId(sales:ID):[Claim]
 }
 input ClaimInput{
     beneficiaryIdentification:ID
@@ -21,5 +23,6 @@ input ClaimInput{
 extend type Mutation{
     createClaim(claimInput:ClaimInput):Claim
     updateClaim(claimInput:ClaimInput,id:ID):Claim
+    redeemClaim(serviceProvider:ID,id:ID):Claim
 }
 
