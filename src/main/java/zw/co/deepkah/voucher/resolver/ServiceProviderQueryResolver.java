@@ -4,6 +4,7 @@ import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import zw.co.deepkah.voucher.document.ServiceProvider;
+import zw.co.deepkah.voucher.repository.ServiceProviderRepository;
 import zw.co.deepkah.voucher.service.ServiceProviderService;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 public class ServiceProviderQueryResolver implements GraphQLQueryResolver {
     
     private ServiceProviderService serviceProviderService;
+    private ServiceProviderRepository serviceProviderRepository;
 
     public ServiceProvider serviceProviderByName(String serviceProviderName){
 
@@ -23,5 +25,9 @@ public class ServiceProviderQueryResolver implements GraphQLQueryResolver {
     public List<ServiceProvider> serviceProviderList(){
 
         return serviceProviderService.findAll().get();
+    }
+
+    public List<ServiceProvider> serviceProviderByCity(String cityId){
+       return  serviceProviderRepository.findByCityId(cityId);
     }
 }
