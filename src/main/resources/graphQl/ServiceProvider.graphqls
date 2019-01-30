@@ -9,6 +9,7 @@ type ServiceProvider{
  extend type Query {
     serviceProviderList:[ServiceProvider]
     serviceProviderByName(name:String):ServiceProvider
+    serviceProviderByCity(city:ID):[ServiceProvider]
 }
 
 input ServiceProviderInput{

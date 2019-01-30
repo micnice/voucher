@@ -1,5 +1,6 @@
 package zw.co.deepkah.voucher.resolver;
 
+
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import lombok.AllArgsConstructor;
 import lombok.Data;

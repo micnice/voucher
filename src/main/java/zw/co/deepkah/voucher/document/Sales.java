@@ -14,7 +14,7 @@ public class Sales extends BaseId {
     private LocalDate saleDate;
     private String soldBy;
     private VoucherSet voucherSet;
-    private Boolean salesIsValid = Boolean.FALSE;
+    private Boolean saleExhausted = Boolean.FALSE;
 
 
 }

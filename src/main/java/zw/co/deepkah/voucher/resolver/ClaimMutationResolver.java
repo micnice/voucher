@@ -7,7 +7,10 @@ import zw.co.deepkah.voucher.document.*;
 import zw.co.deepkah.voucher.dto.ClaimDto;
 import zw.co.deepkah.voucher.service.*;
 
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.*;
 
 @AllArgsConstructor
 @Component
@@ -52,4 +55,22 @@ public class ClaimMutationResolver implements GraphQLMutationResolver {
 
         return claimService.save(claim);
     }
+
+
+    public Claim redeemClaim(String serviceProviderId,Optional<String> claimId){
+
+      Claim claim = new Claim();
+       if(claimId.isPresent()) {
+           claim = claimService.getOne(claimId.get()).get();
+           if (!claim.getRedeemed()){
+               claim.setRedeemed(Boolean.TRUE);
+               claim.setRedemptionDate(LocalDate.now());
+           claim.setServiceProvider(serviceProviderService.getOne(serviceProviderId).get());
+           return claimService.save(claim);
+       }
+       }
+       return claim;
+
+    }
 }
+

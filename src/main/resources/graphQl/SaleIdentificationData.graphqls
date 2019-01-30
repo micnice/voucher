@@ -1,0 +1,14 @@
+type SaleIdentificationData{
+    beneficiaryIdentityId:String
+    identificationNumber:String
+    saleId:String
+    firstName:String
+    lastName:String
+    voucherSerialNumber:String;
+    packageName:String;
+}
+
+type Query {
+
+    voucherSaleIdentificationDataList:[SaleIdentificationData]
+}

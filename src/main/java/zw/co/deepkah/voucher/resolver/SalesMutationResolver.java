@@ -37,12 +37,10 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
         BeneficiaryAssessment ba = beneficiaryAssessmentService.findByBeneficiaryIdentityId(savedSale.getBeneficiaryIdentityId());
         ba.setSale(Boolean.TRUE);
         beneficiaryAssessmentService.save(ba);
-        BeneficiaryIdentification bi = beneficiaryIdentificationService.findOne(salesDto.getBeneficiaryIdentityId());
+        BeneficiaryIdentification bi = beneficiaryIdentificationService.getOne(salesDto.getBeneficiaryIdentityId()).get();
 
         try {
             for(VoucherType voucherType:voucherSet.getVoucherTypeSet()) {
-                System.out.println("%%%%---"+voucherSet.getVoucherTypeSet().size());
-                System.out.println("%%%%--ID ID-"+voucherType.getId());
                 Claim claim = new Claim();
                 claim.setSales(savedSale);
                 claim.setVoucherType(voucherType);

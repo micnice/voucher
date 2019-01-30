@@ -9,4 +9,5 @@ import java.util.List;
 public interface ClaimRepository extends MongoRepository<Claim,String> {
 
     List<Claim> findByBeneficiaryIdentification(BeneficiaryIdentification beneficiaryIdentification);
+    List<Claim> findBySalesId(String salesId);
 }
