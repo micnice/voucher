@@ -26,7 +26,7 @@ public class VoucherSetMutationResolver implements GraphQLMutationResolver {
 
     public VoucherSet createVoucherSet(VoucherSetDto voucherSetDto){
         VoucherSet voucherSet = new VoucherSet();
-        Set<VoucherType>  voucherTypeSet = new HashSet<>();
+        List<VoucherType>  voucherTypeSet = new ArrayList<>();
 
         voucherSet.setName(voucherSetDto.getName());
         voucherSet.setDescription(voucherSetDto.getDescription());
@@ -35,8 +35,8 @@ public class VoucherSetMutationResolver implements GraphQLMutationResolver {
            voucherType = voucherTypeService.getOne(s).get();
             voucherTypeSet.add(voucherType);
         });
-
-        voucherSet.setVoucherTypeSet(voucherTypeSet);
+       Set oderedSet =new LinkedHashSet(voucherTypeSet);
+        voucherSet.setVoucherTypeSet(oderedSet);
 
 
 
