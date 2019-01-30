@@ -13,10 +13,14 @@ input UserInput{
     lastName:String
     username:String
     email:String
-    roleSet:[Role]
+    roleSet:[ID]
     password:String
 }
 extend type Mutation {
     createUser(userInput:UserInput):User
     updateUser(userInput:UserInput,id:ID):User
+}
+
+extend type Query{
+    userList:[User]
 }

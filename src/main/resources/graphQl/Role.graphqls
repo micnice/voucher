@@ -1,15 +1,24 @@
-enum Role{
-
-    ADMINISTRATOR
-    BENEFICIARY_ASSESSOR
-    BENEFICIARY_IDENTIFIER
-    CLAIMS_ASSESSOR
-    INSTITUTION_MANAGER
-    DATA_ENTRY_CLERK
-    MANAGEMENT
+type Role{
+    id:ID
+    name:String
+    description:String
+    permissionSet:[Permission]
 }
 
+
 extend type Query {
-roleList:[Role]
+    roleList:[Role]
+    roleByName(name:String):Role
+}
+
+input RoleInput{
+    name:String
+    description:String
+    permissionSet:[ID]
+}
+
+extend type Mutation{
+    createRole(roleInput:RoleInput):Role
+    updateRole(roleInput:RoleInput,id:ID):Role
 }
 

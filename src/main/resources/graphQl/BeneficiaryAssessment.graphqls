@@ -11,6 +11,7 @@ extend type Query {
     beneficiaryAssessmentById(id:ID):BeneficiaryAssessment
     beneficiaryAssessmentByBeneficiaryIdentityId(beneficiaryIdentityId:ID):BeneficiaryAssessment
     beneficiaryAssessmentList:[BeneficiaryAssessment]
+    beneficiariesWithNoSales:[BeneficiaryAssessment]
 
 }
 

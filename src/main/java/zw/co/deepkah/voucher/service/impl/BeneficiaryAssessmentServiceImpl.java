@@ -48,4 +48,9 @@ public class BeneficiaryAssessmentServiceImpl implements BeneficiaryAssessmentSe
     public boolean existsByBeneficiaryIdentityId(String beneficiaryIdentityId) {
         return beneficiaryAssessmentRepository.existsByBeneficiaryIdentityId(beneficiaryIdentityId);
     }
+
+    @Override
+    public List<BeneficiaryAssessment> getAllBySaleIsFalse() {
+        return beneficiaryAssessmentRepository.getAllBySaleIsFalse();
+    }
 }
