@@ -10,6 +10,7 @@ public interface BeneficiaryAssessmentRepository extends MongoRepository<Benefic
 
     BeneficiaryAssessment getByBeneficiaryIdentityId(String beneficiaryIdentityId);
     boolean existsByBeneficiaryIdentityId(String beneficiaryIdentityId);
+    List<BeneficiaryAssessment> getAllBySaleIsFalse();
 
 
 }

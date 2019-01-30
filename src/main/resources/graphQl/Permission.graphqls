@@ -1,0 +1,15 @@
+type Permission{
+    id:ID
+    name:String
+}
+extend type Query {
+    permissionList:[Permission]
+}
+
+input PermissionInput{
+    name:String
+}
+ extend type Mutation {
+    createPermission(permissionInput:PermissionInput):Permission
+    updatePermission(permissionInput:PermissionInput,id:ID):Permission
+}

@@ -25,4 +25,8 @@ public class BeneficiaryAssessmentQueryResolver implements GraphQLQueryResolver 
     public  BeneficiaryAssessment beneficiaryAssessmentById(String beneficiaryAssessmentId){
         return beneficiaryAssessmentService.getOne(beneficiaryAssessmentId).get();
     }
+
+    public List<BeneficiaryAssessment> getBeneficiariesWithNoSales(){
+        return beneficiaryAssessmentService.getAllBySaleIsFalse();
+    }
 }
