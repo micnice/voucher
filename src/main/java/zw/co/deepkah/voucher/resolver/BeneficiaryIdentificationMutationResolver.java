@@ -27,14 +27,16 @@ public class BeneficiaryIdentificationMutationResolver implements GraphQLMutatio
         beneficiaryIdentification.setLmp(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getLmp()));
         beneficiaryIdentification.setLatitude(beneficiaryIdentificationDto.getLatitude());
         beneficiaryIdentification.setLongitude(beneficiaryIdentificationDto.getLongitude());
+        beneficiaryIdentification.setEdd(DateFormatter.calculateEDD(beneficiaryIdentification.getLmp()));
         beneficiaryIdentification.setParity(beneficiaryIdentificationDto.getParity());
+        beneficiaryIdentification.setPhoneNumber(beneficiaryIdentificationDto.getPhoneNumber());
         beneficiaryIdentification.setDataCollectionDate(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getDataCollectionDate()));
         beneficiaryIdentification.setMaritalStatus(beneficiaryIdentificationDto.getMaritalStatus());
 
        boolean identityNumberExists = beneficiaryIdentificationService.existsByIdentificationNumber(beneficiaryIdentification.getIdentificationNumber());
 
-               if(!identityNumberExists){
-              return beneficiaryIdentificationService.save(beneficiaryIdentification);
+               if(!identityNumberExists) {
+                   return beneficiaryIdentificationService.save(beneficiaryIdentification);
                }
                else {
                    try {

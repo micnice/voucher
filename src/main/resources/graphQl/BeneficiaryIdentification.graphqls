@@ -11,6 +11,8 @@ type BeneficiaryIdentification{
     latitude:String
     longitude:String
     isAssessed:Boolean
+    edd: String
+    phoneNumber:String
     dataCollectionDate:String
     povertyScore:Long
 }
@@ -35,6 +37,7 @@ input BeneficiaryIdentificationInput{
     latitude:String
     longitude:String
     dataCollectionDate:String
+    phoneNumber:String
 }
 
 extend type Mutation {
