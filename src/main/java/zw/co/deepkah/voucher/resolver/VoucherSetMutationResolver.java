@@ -32,11 +32,13 @@ public class VoucherSetMutationResolver implements GraphQLMutationResolver {
         voucherSet.setDescription(voucherSetDto.getDescription());
 
         voucherSetDto.getVoucherTypeSet().stream().forEach(s -> {
+
            voucherType = voucherTypeService.getOne(s).get();
             voucherTypeSet.add(voucherType);
+
         });
-       Set oderedSet =new LinkedHashSet(voucherTypeSet);
-        voucherSet.setVoucherTypeSet(oderedSet);
+       Set orderedSet =new LinkedHashSet(voucherTypeSet);
+        voucherSet.setVoucherTypeSet(orderedSet);
 
 
 
