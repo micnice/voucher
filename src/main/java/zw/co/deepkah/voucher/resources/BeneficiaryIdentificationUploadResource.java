@@ -95,8 +95,9 @@ public class BeneficiaryIdentificationUploadResource {
         beneficiaryIdentification.setLastName(beneficiaryIdentificationDto.getLastName());
         beneficiaryIdentification.setIdentificationNumber(beneficiaryIdentificationDto.getIdentificationNumber());
         beneficiaryIdentification.setParity(beneficiaryIdentificationDto.getParity());
-        beneficiaryIdentification.setLmp(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getLmp()));
-        beneficiaryIdentification.setBirthDate(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getBirthDate()));
+        beneficiaryIdentification.setLmp(beneficiaryIdentificationDto.getLmp());
+        beneficiaryIdentification.setLmp(beneficiaryIdentificationDto.getLmp());
+        beneficiaryIdentification.setBirthDate(beneficiaryIdentificationDto.getBirthDate());
         beneficiaryIdentification.setCreatedBy(beneficiaryIdentificationDto.getIdentifiedBy());
         beneficiaryIdentification.setDateCreated(beneficiaryIdentificationDto.getDateIdentified());
 

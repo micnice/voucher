@@ -29,7 +29,7 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
     public Sales createSales(SalesDto salesDto){
         BeneficiaryIdentification bi = beneficiaryIdentificationService.getOne(salesDto.getBeneficiaryIdentityId()).get();
         Sales sales = new Sales();
-        sales.setSaleDate(DateFormatter.getDateFromString(salesDto.getSaleDate()));
+        sales.setSaleDate(salesDto.getSaleDate());
         sales.setSoldBy(salesDto.getSoldBy());
         sales.setVoucherSerialNumber(UUID.randomUUID().toString());
         sales.setBeneficiaryIdentityId(salesDto.getBeneficiaryIdentityId());
@@ -40,8 +40,8 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
         try{
             if(bi.getPhoneNumber()!=null) {
                 MultiValueMap<String, String> map = TextMessageUtil.getTxtMessageUtils();
-                Date edd = DateFormatter.calculateEDD(bi.getLmp());
-                String message = TextMessageUtil.getVoucherSaleNotificationMessage(bi.getFirstName() + " " + bi.getLastName(),edd);
+
+                String message = TextMessageUtil.getVoucherSaleNotificationMessage(bi.getFirstName() + " " + bi.getLastName(),bi.getEdd());
                 map.add("mobile", PhoneNumberFormatter.formatPhoneNumber(bi.getPhoneNumber()));
                 map.add("message", message);
                 RestTemplateUtil.postData(map);
@@ -59,10 +59,10 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
             for(VoucherType voucherType:voucherSet.getVoucherTypeSet()) {
                 Claim claim = new Claim();
                 claim.setSales(savedSale);
+                claim.setVoucherType(voucherType);
                 if(claim.getVoucherType().getName().contains("Token")){
                     claim.setHasOTP(Boolean.TRUE);
                 }
-                claim.setVoucherType(voucherType);
                 claim.setBeneficiaryIdentification(bi);
                 claimService.save(claim);
             }
@@ -78,7 +78,7 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
         Sales sales = new Sales();
         salesId.ifPresent(s -> {
             sales.setId(salesService.getOne(s).get().getId());
-            sales.setSaleDate(DateFormatter.getDateFromString(salesDto.getSaleDate()));
+            sales.setSaleDate(salesDto.getSaleDate());
             sales.setSoldBy(salesDto.getSoldBy());
             sales.setVoucherSerialNumber(salesDto.getVoucherSerialNumber());
             sales.setBeneficiaryIdentityId(salesDto.getBeneficiaryIdentityId());
@@ -89,40 +89,5 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
         return salesService.save(sales);
     }
 
-    public String createTenDollarOTP(String saleID){
-     Sales sale = salesService.getOne(saleID).get();
-     Random rnd = new Random();
-     StringBuilder sb =new StringBuilder(rnd.nextInt(GeneralUtils.alphabet.length()));
-     sb.append(1000+rnd.nextInt(8999));
-     sale.setTenDollarOTP(sb.toString());
-     salesService.save(sale);
-        BeneficiaryIdentification beneficiaryIdentification = beneficiaryIdentificationService.getOne(sale.getBeneficiaryIdentityId()).get();
-        MultiValueMap<String, String> map = TextMessageUtil.getTxtMessageUtils();
-        String message = TextMessageUtil.getOTP(beneficiaryIdentification.getFirstName()+" "+beneficiaryIdentification.getLastName()
-                , "10",sale.getTenDollarOTP());
-        map.add("mobile", PhoneNumberFormatter.formatPhoneNumber(beneficiaryIdentification.getPhoneNumber()));
-        map.add("message", message);
-        RestTemplateUtil.postData(map);
-     return sb.toString();
-    }
 
-    public String createTwentyDollarOTP(String saleID){
-        Sales sale = salesService.getOne(saleID).get();
-        Random rnd = new Random();
-        StringBuilder sb =new StringBuilder(rnd.nextInt(GeneralUtils.alphabet.length()));
-        sb.append(1000+rnd.nextInt(8999));
-        sale.setTwentyDollarOTP(sb.toString());
-      Sales savedSale =salesService.save(sale);
-      if(savedSale!=null){
-          BeneficiaryIdentification beneficiaryIdentification = beneficiaryIdentificationService.getOne(sale.getBeneficiaryIdentityId()).get();
-          MultiValueMap<String, String> map = TextMessageUtil.getTxtMessageUtils();
-          String message = TextMessageUtil.getOTP(beneficiaryIdentification.getFirstName()+" "+beneficiaryIdentification.getLastName()
-                  , "20",sale.getTwentyDollarOTP());
-          map.add("mobile", PhoneNumberFormatter.formatPhoneNumber(beneficiaryIdentification.getPhoneNumber()));
-          map.add("message", message);
-          RestTemplateUtil.postData(map);
-
-      }
-        return sb.toString();
-    }
 }

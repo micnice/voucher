@@ -6,6 +6,10 @@ import org.springframework.util.MultiValueMap;
 import java.util.Date;
 import java.time.LocalDate;
 
+import static zw.co.deepkah.voucher.util.DateFormatter.getFormmatedLocalDate;
+import static zw.co.deepkah.voucher.util.DateFormatter.getLocalDateFromString;
+import static zw.co.deepkah.voucher.util.DateFormatter.getNotificationDate;
+
 /**
  * Created by morris
  */
@@ -24,17 +28,18 @@ public class TextMessageUtil {
 
        String message = "";
        if(numberOfDays!=0) {
-           message = "Dear " + fullName + " Your Next ANC visit  ie (ANC 2nd Visit) is due in " + numberOfDays + " days time from today, that is on " + expectedDateOfVisit + ". Good Day.";
+           message = "Dear " + fullName + " Your Next ANC visit  ie (ANC 2nd Visit) is due in " + numberOfDays + " days time from today, that is on " + getFormmatedLocalDate(expectedDateOfVisit) + ". Good Day.";
        }else{
            message = "Dear " + fullName + " Your Next ANC visit ie (ANC 2nd Visit) is due today. Good Day.";
 
        }
         return message;
     }
-    public static String getVoucherSaleNotificationMessage(String fullName, Date edd){
+    public static String getVoucherSaleNotificationMessage(String fullName, String edd){
 
-        String message = "Dear "+fullName+" Please go to the nearest clinic and book for Antenatal Care Services within 3 days. You Expected Date Of Delivery" +
-                "(EDD) is on "+edd;
+        LocalDate eddLocalDate = getLocalDateFromString(edd);
+        String message = "Dear "+fullName+" Please go to the nearest clinic and book for Antenatal Care Services within 3 days. Your Expected Date Of Delivery" +
+                "(EDD) is on "+getFormmatedLocalDate(eddLocalDate);
 
         return message;
     }
@@ -42,7 +47,7 @@ public class TextMessageUtil {
 
         String message = "";
         if(numberOfDays!=0) {
-            message = "Dear " + fullName + " Your Next ANC Visit ie (ANC 3rd Visit) is due in " + numberOfDays + " days time from today, that is on " + expectedDateOfVisit + ". Good Day.";
+            message = "Dear " + fullName + " Your Next ANC Visit ie (ANC 3rd Visit) is due in " + numberOfDays + " days time from today, that is on " +getFormmatedLocalDate(expectedDateOfVisit) + ". Good Day.";
         }else {
             message = "Dear " + fullName + " Your Next ANC Visit ie (ANC 3rd Visit) is due TODAY + . Good Day.";
 
@@ -53,7 +58,7 @@ public class TextMessageUtil {
 
         String message = "";
         if(numberOfDays!=0){
-          message="Dear "+fullName+" Your Next ANC Visit ie(ANC 4th Visit)is due in "+numberOfDays+" days time from today, that is on " +expectedDateOfVisit+". Good Day." ;
+          message="Dear "+fullName+" Your Next ANC Visit ie(ANC 4th Visit)is due in "+numberOfDays+" days time from today, that is on " +getFormmatedLocalDate(expectedDateOfVisit)+". Good Day." ;
         }else{
          message= "Dear "+fullName+" Your Next ANC Visit ie(ANC 4th Visit)is due today. Good Day." ;
 
@@ -65,14 +70,14 @@ public class TextMessageUtil {
     public static String getPNC7DaysNotificationMessage(LocalDate expectedDateOfVisit,String fullName){
 
 
-        String message = "Dear "+fullName+" Please Remember To Attend Your 7 Days Post Natal Care on "+expectedDateOfVisit+". Good Day.";
+        String message = "Dear "+fullName+" Please Remember To Attend Your 7 Days Post Natal Care on "+getFormmatedLocalDate(expectedDateOfVisit)+". Good Day.";
 
         return message;
     }
     public static String getPNC6WeeksDaysNotificationMessage(LocalDate expectedDateOfVisit,String fullName){
 
 
-        String message = "Dear "+fullName+" Please Remember To Attend Your 6 Weeks Post Natal Care on "+expectedDateOfVisit+". Good Day.";
+        String message = "Dear "+fullName+" Please Remember To Attend Your 6 Weeks Post Natal Care on "+getFormmatedLocalDate(expectedDateOfVisit)+". Good Day.";
 
         return message;
     }

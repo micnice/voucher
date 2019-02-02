@@ -25,8 +25,6 @@ input SalesInput{
     voucherSet:ID
 }
 extend type Mutation {
-    createTenDollarOTP(saleID:ID):String
-    createTwentyDollarOTP(saleID:ID):String
     updateSales(salesInput:SalesInput,id:ID):Sales
     createSales(salesInput:SalesInput):Sales
 }

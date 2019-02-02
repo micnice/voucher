@@ -16,7 +16,7 @@ public class DateFormatter {
                 return null;
             }
 
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
             System.out.println("###-MY-DATE-"+format.parse(date));
             return format.parse(date);
         }catch (Exception ex){
@@ -30,15 +30,33 @@ public class DateFormatter {
         if(date==null ||date.isEmpty()){
             return null;
         }
-//        ZoneId zoneId = ZoneId.of("Africa/Harare");
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
 
-        LocalDate localDate = LocalDate.parse(date);
+        LocalDate localDate = LocalDate.parse(date,formatter);
 
 
         return localDate;
     }
 
+    public static LocalDate getNotificationDate(String date){
+        if(date==null || date.isEmpty()){
+           return null;
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, MMM d yyyy");
+        LocalDate localDate = LocalDate.parse(date,formatter);
+        return localDate;
+    }
+
+    public static String getFormmatedLocalDate(LocalDate localDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, MMM d yyyy");
+        return  formatter.format(localDate);
+
+    }
+    public static String getFormmatedNormalFormat(LocalDate localDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        return  formatter.format(localDate);
+
+    }
     public static LocalDate getLocalDateFromUtilDate(Date date) {
 
         if(date==null){
@@ -52,14 +70,12 @@ public class DateFormatter {
         return localDate;
     }
 
-    public static Date calculateEDD(Date lmpDate){
+    public static String calculateEDD(String lmpDate){
 
-        System.out.println("@@@-LMPRAW--"+lmpDate);
-        LocalDate lmpLocalDate = DateFormatter.getLocalDateFromUtilDate(lmpDate);
-        System.out.println("@@@-LMPLOCAL--"+lmpLocalDate);
+        LocalDate lmpLocalDate = DateFormatter.getLocalDateFromString(lmpDate);
         LocalDate eddLocalDate = lmpLocalDate.plusDays(280);
-        ZoneId zoneId = ZoneId.of("Africa/Harare");
-        return Date.from(lmpLocalDate.atStartOfDay(zoneId).toInstant());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        return eddLocalDate.format(formatter);
 
     }
 

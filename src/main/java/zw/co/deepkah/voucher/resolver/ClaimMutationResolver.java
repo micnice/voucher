@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
+import static zw.co.deepkah.voucher.util.DateFormatter.getFormmatedNormalFormat;
+
 @AllArgsConstructor
 @Component
 public class ClaimMutationResolver implements GraphQLMutationResolver {
@@ -63,10 +65,11 @@ public class ClaimMutationResolver implements GraphQLMutationResolver {
            claim = claimService.getOne(claimId.get()).get();
            if (!claim.getRedeemed()){
                claim.setRedeemed(Boolean.TRUE);
-               claim.setRedemptionDate(new Date());
-               Sales sale = claim.getSales();
+               claim.setRedemptionDate(getFormmatedNormalFormat(LocalDate.now()));
+               Sales sale = salesService.getOne(claim.getSales().getId()).get();
+
                if(claim.getVoucherType().getName().trim().contains("ANC 1st".trim())){
-                   sale.setAncVisitOneDate(claim.getRedemptionDate());
+                 sale.setAncVisitOneDate(claim.getRedemptionDate());
                    salesService.save(sale);
                }if(claim.getVoucherType().getName().trim().contains("ANC 2nd".trim())){
                    sale.setAncVisitTwoDate(claim.getRedemptionDate());

@@ -9,7 +9,7 @@ import java.util.Date;
 public class BeneficiaryAssessment extends BaseId {
    private String beneficiaryIdentityId;
    private PregnancyStatus pregnancyStatus;
-   private Date dateAssessed;
+   private String dateAssessed;
    private Long povertyScore;
    private String latitude;
    private String longitude;

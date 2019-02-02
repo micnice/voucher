@@ -16,7 +16,7 @@ public class Claim extends BaseId {
             private VoucherType voucherType;
             private Sales sales;
             private Boolean redeemed = Boolean.FALSE;
-            private Date redemptionDate;
+            private String redemptionDate;
             private Boolean hasOTP = Boolean.FALSE;
 
     public Claim(String id) {

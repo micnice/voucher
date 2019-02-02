@@ -21,16 +21,16 @@ public class BeneficiaryIdentificationMutationResolver implements GraphQLMutatio
         BeneficiaryIdentification beneficiaryIdentification = new BeneficiaryIdentification();
         beneficiaryIdentification.setFirstName(beneficiaryIdentificationDto.getFirstName());
         beneficiaryIdentification.setLastName(beneficiaryIdentificationDto.getLastName());
-        beneficiaryIdentification.setBirthDate(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getBirthDate()));
+        beneficiaryIdentification.setBirthDate(beneficiaryIdentificationDto.getBirthDate());
         beneficiaryIdentification.setEducationStatus(beneficiaryIdentificationDto.getEducationStatus());
         beneficiaryIdentification.setIdentificationNumber(beneficiaryIdentificationDto.getIdentificationNumber());
-        beneficiaryIdentification.setLmp(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getLmp()));
+        beneficiaryIdentification.setLmp(beneficiaryIdentificationDto.getLmp());
         beneficiaryIdentification.setLatitude(beneficiaryIdentificationDto.getLatitude());
         beneficiaryIdentification.setLongitude(beneficiaryIdentificationDto.getLongitude());
         beneficiaryIdentification.setEdd(DateFormatter.calculateEDD(beneficiaryIdentification.getLmp()));
         beneficiaryIdentification.setParity(beneficiaryIdentificationDto.getParity());
         beneficiaryIdentification.setPhoneNumber(beneficiaryIdentificationDto.getPhoneNumber());
-        beneficiaryIdentification.setDataCollectionDate(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getDataCollectionDate()));
+        beneficiaryIdentification.setDataCollectionDate(beneficiaryIdentificationDto.getDataCollectionDate());
         beneficiaryIdentification.setMaritalStatus(beneficiaryIdentificationDto.getMaritalStatus());
 
        boolean identityNumberExists = beneficiaryIdentificationService.existsByIdentificationNumber(beneficiaryIdentification.getIdentificationNumber());
@@ -56,14 +56,14 @@ public class BeneficiaryIdentificationMutationResolver implements GraphQLMutatio
             beneficiaryIdentification = beneficiaryIdentificationService.getOne(beneficiaryIdentityId.get()).get();
             beneficiaryIdentification.setFirstName(beneficiaryIdentificationDto.getFirstName());
             beneficiaryIdentification.setLastName(beneficiaryIdentificationDto.getLastName());
-            beneficiaryIdentification.setBirthDate(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getBirthDate()));
+            beneficiaryIdentification.setBirthDate(beneficiaryIdentificationDto.getBirthDate());
             beneficiaryIdentification.setEducationStatus(beneficiaryIdentificationDto.getEducationStatus());
             beneficiaryIdentification.setIdentificationNumber(beneficiaryIdentificationDto.getIdentificationNumber());
-            beneficiaryIdentification.setLmp(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getLmp()));
+            beneficiaryIdentification.setLmp(beneficiaryIdentificationDto.getLmp());
             beneficiaryIdentification.setLatitude(beneficiaryIdentificationDto.getLatitude());
             beneficiaryIdentification.setLongitude(beneficiaryIdentificationDto.getLongitude());
             beneficiaryIdentification.setParity(beneficiaryIdentificationDto.getParity());
-            beneficiaryIdentification.setDataCollectionDate(DateFormatter.getDateFromString(beneficiaryIdentificationDto.getDataCollectionDate()));
+            beneficiaryIdentification.setDataCollectionDate(beneficiaryIdentificationDto.getDataCollectionDate());
             beneficiaryIdentification.setMaritalStatus(beneficiaryIdentificationDto.getMaritalStatus());
 
         }

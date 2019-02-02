@@ -35,20 +35,21 @@ public class ReminderNotificationService {
         try {
 
             for(Sales sales:salesService.findAll().get()){
+                System.out.println("$$$$$--ANC1"+sales.getAncVisitOneDate()+"-"+sales.getAnc1Notified());
+                System.out.println("$$$$$--ANC2"+sales.getAncVisitTwoDate());
                 BeneficiaryIdentification bi = bis.getOne(sales.getBeneficiaryIdentityId()).get();
                 LocalDate today = LocalDate.now();
                 if(bi!=null && bi.getPhoneNumber()!=null){
-
                     //ANC VISIT 2
                 if(!sales.getAnc2Notified() &&sales.getAncVisitOneDate()!=null && sales.getAncVisitTwoDate() ==null){
                   {
-                      LocalDate ancVisitOneDate = DateFormatter.getLocalDateFromUtilDate(sales.getAncVisitOneDate());
+                      LocalDate ancVisitOneDate = DateFormatter.getLocalDateFromString(sales.getAncVisitOneDate());
 
                       int numberOfDays = today.getDayOfYear()-ancVisitOneDate.getDayOfYear();
                       //TODO LIVE LIVE
                      // LocalDate expectedDateOfVisit =DateFormatter.expectedDateOfVisit(today,28-numberOfDays);
                       LocalDate expectedDateOfVisit =DateFormatter.expectedDateOfVisit(today,3);
-
+                      System.out.println("&&&&&&&&&--ANCVISITONE-"+sales.getAncVisitOneDate());
                      // if(numberOfDays>=25){
                        if(numberOfDays==0){
                           MultiValueMap<String, String> map = TextMessageUtil.getTxtMessageUtils();
@@ -72,7 +73,7 @@ public class ReminderNotificationService {
                     //ANC VISIT 3
                     if(!sales.getAnc3Notified() &&sales.getAncVisitTwoDate()!=null && sales.getAncVisitThreeDate() ==null){
                         {
-                            LocalDate ancVisitTwoDate = DateFormatter.getLocalDateFromUtilDate(sales.getAncVisitTwoDate());
+                            LocalDate ancVisitTwoDate = DateFormatter.getLocalDateFromString(sales.getAncVisitTwoDate());
 
                             int numberOfDays = today.getDayOfYear()-ancVisitTwoDate.getDayOfYear();
 
@@ -96,7 +97,7 @@ public class ReminderNotificationService {
                     //ANC VISIT 4
                     if(!sales.getAnc4Notified() &&sales.getAncVisitThreeDate()!=null && sales.getAncVisitFourDate() ==null){
                         {
-                            LocalDate ancVisitThreeDate = DateFormatter.getLocalDateFromUtilDate(sales.getAncVisitThreeDate());
+                            LocalDate ancVisitThreeDate = DateFormatter.getLocalDateFromString(sales.getAncVisitThreeDate());
 
                             int numberOfDays = today.getDayOfYear()-ancVisitThreeDate.getDayOfYear();
 
@@ -121,7 +122,7 @@ public class ReminderNotificationService {
                     //PNC 7 Days
                     if(!sales.getPnc7DaysNotified() &&sales.getPnc6weeksVisitDate()==null && sales.getDateOfDelivery()!=null){
                         {
-                            LocalDate dateOfDelivery = DateFormatter.getLocalDateFromUtilDate(sales.getDateOfDelivery());
+                            LocalDate dateOfDelivery = DateFormatter.getLocalDateFromString(sales.getDateOfDelivery());
 
                             int numberOfDays = today.getDayOfYear()-dateOfDelivery.getDayOfYear();
 
@@ -144,7 +145,7 @@ public class ReminderNotificationService {
                     //PNC 6 weeks
                     if(!sales.getPnc6weeksNotified() &&sales.getPnc6weeksVisitDate()==null && sales.getDateOfDelivery()!=null){
                         {
-                            LocalDate dateOfDelivery = DateFormatter.getLocalDateFromUtilDate(sales.getDateOfDelivery());
+                            LocalDate dateOfDelivery = DateFormatter.getLocalDateFromString(sales.getDateOfDelivery());
 
                             int numberOfDays = today.getDayOfYear()-dateOfDelivery.getDayOfYear();
 
