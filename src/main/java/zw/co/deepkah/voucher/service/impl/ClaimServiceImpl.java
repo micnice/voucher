@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import zw.co.deepkah.voucher.document.BeneficiaryIdentification;
 import zw.co.deepkah.voucher.document.Claim;
+import zw.co.deepkah.voucher.document.ServiceProvider;
 import zw.co.deepkah.voucher.repository.ClaimRepository;
 import zw.co.deepkah.voucher.service.ClaimService;
 
@@ -46,4 +47,11 @@ public class ClaimServiceImpl implements ClaimService {
     public List<Claim> findByBeneficiaryIdentification(BeneficiaryIdentification beneficiaryIdentification) {
         return claimRepository.findByBeneficiaryIdentification(beneficiaryIdentification);
     }
+
+    @Override
+    public List<Claim> findByServiceProviderId(String serviceProviderId) {
+        return claimRepository.findByServiceProviderId(serviceProviderId);
+    }
+
+
 }

@@ -12,6 +12,7 @@ extend type Query {
     claimList:[Claim]
     findByBeneficiaryId(beneficiaryIdentification:ID):[Claim]
     claimsBySaleId(sales:ID):[Claim]
+    claimsListByServiceProvider(serviceProvider:ID):[Claim]
 }
 input ClaimInput{
     beneficiaryIdentification:ID

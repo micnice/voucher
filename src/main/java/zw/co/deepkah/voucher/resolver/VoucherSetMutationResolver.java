@@ -30,19 +30,15 @@ public class VoucherSetMutationResolver implements GraphQLMutationResolver {
 
         voucherSet.setName(voucherSetDto.getName());
         voucherSet.setDescription(voucherSetDto.getDescription());
-
         voucherSetDto.getVoucherTypeSet().stream().forEach(s -> {
 
            voucherType = voucherTypeService.getOne(s).get();
             voucherTypeSet.add(voucherType);
 
         });
-       Set orderedSet =new LinkedHashSet(voucherTypeSet);
-        voucherSet.setVoucherTypeSet(orderedSet);
-
-
-
-        return voucherSetService.save(voucherSet);
+                 Set orderedSet =new LinkedHashSet(voucherTypeSet);
+               voucherSet.setVoucherTypeSet(orderedSet);
+            return voucherSetService.save(voucherSet);
     }
 
 
@@ -54,10 +50,14 @@ public class VoucherSetMutationResolver implements GraphQLMutationResolver {
             voucherSet.setName(voucherSetDto.getName());
             voucherSet.setDescription(voucherSetDto.getDescription());
             voucherSetDto.getVoucherTypeSet().stream().forEach(voucherTypeSetId -> {
+
                 voucherTypeSet.add(new VoucherType(voucherTypeService.getOne(voucherTypeSetId).get().getId()));
+
             });
 
             voucherSet.setVoucherTypeSet(voucherTypeSet);
+            System.out.println("voucherSet.getName()===="+voucherSet.getName()+"voucherSet.getDescription(===)"+voucherSet.getDescription()+"voucherSet.getVoucherTypeSet()"+voucherSet.getVoucherTypeSet());
+
         }
         return voucherSetService.save(voucherSet);
     }
