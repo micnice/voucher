@@ -8,9 +8,10 @@ import zw.co.deepkah.voucher.dto.ClaimDto;
 import zw.co.deepkah.voucher.service.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.*;
+import java.util.Date;
+import java.util.Optional;
+
+import static zw.co.deepkah.voucher.util.DateFormatter.getFormmatedNormalFormat;
 
 @AllArgsConstructor
 @Component
@@ -64,8 +65,41 @@ public class ClaimMutationResolver implements GraphQLMutationResolver {
            claim = claimService.getOne(claimId.get()).get();
            if (!claim.getRedeemed()){
                claim.setRedeemed(Boolean.TRUE);
-               claim.setRedemptionDate(LocalDate.now());
+               claim.setRedemptionDate(getFormmatedNormalFormat(LocalDate.now()));
+               Sales sale = salesService.getOne(claim.getSales().getId()).get();
+
+               if(claim.getVoucherType().getName().trim().contains("ANC 1st".trim())){
+                 sale.setAncVisitOneDate(claim.getRedemptionDate());
+                   salesService.save(sale);
+               }if(claim.getVoucherType().getName().trim().contains("ANC 2nd".trim())){
+                   sale.setAncVisitTwoDate(claim.getRedemptionDate());
+                   salesService.save(sale);
+               }
+               if(claim.getVoucherType().getName().trim().contains("ANC 3rd".trim())){
+                   sale.setAncVisitThreeDate(claim.getRedemptionDate());
+                   salesService.save(sale);
+               }
+               if(claim.getVoucherType().getName().trim().contains("ANC 4th".trim())){
+                   sale.setAncVisitFourDate(claim.getRedemptionDate());
+                   salesService.save(sale);
+               }
+               if(claim.getVoucherType().getName().trim().contains("PNC 1st".trim())){
+                   sale.setPnc7DaysVisitDate(claim.getRedemptionDate());
+                   salesService.save(sale);
+               }
+               if(claim.getVoucherType().getName().trim().contains("PNC 2".trim())){
+                   sale.setPnc6weeksVisitDate(claim.getRedemptionDate());
+                   salesService.save(sale);
+               }
+               if(claim.getVoucherType().getName().trim().contains("Delivery".trim())
+                       ||claim.getVoucherType().getName().trim().contains("Caesarean".trim())){
+                   sale.setDateOfDelivery(claim.getRedemptionDate());
+                   salesService.save(sale);
+               }
+
+
            claim.setServiceProvider(serviceProviderService.getOne(serviceProviderId).get());
+
            return claimService.save(claim);
        }
        }

@@ -5,7 +5,8 @@ type Sales{
     soldBy:String
     beneficiaryIdentityId:ID
     voucherSet:VoucherSet
-
+    twentyDollarOTP: String
+    tenDollarOTP: String
 
 }
 

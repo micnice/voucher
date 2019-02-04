@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @Document(collection = "claim")
@@ -15,7 +16,8 @@ public class Claim extends BaseId {
             private VoucherType voucherType;
             private Sales sales;
             private Boolean redeemed = Boolean.FALSE;
-            private LocalDate redemptionDate;
+            private String redemptionDate;
+            private Boolean hasOTP = Boolean.FALSE;
 
     public Claim(String id) {
         super(id);

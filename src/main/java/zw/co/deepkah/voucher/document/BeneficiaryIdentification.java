@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.beans.Transient;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -15,16 +16,18 @@ public class BeneficiaryIdentification extends BaseId {
     private String firstName;
     private String lastName;
     private MaritalStatus maritalStatus;
-    private LocalDate birthDate;
+    private String birthDate;
     private EducationStatus educationStatus;
-    private LocalDate lmp;
+    private String lmp;
     private Long parity;
     private String identificationNumber;
     private String latitude;
     private String longitude;
     private Boolean isAssessed = Boolean.FALSE;
     private Boolean reAssess = Boolean.FALSE;
-    private LocalDate dataCollectionDate;
+    private String dataCollectionDate;
+    private String edd;
+    private String phoneNumber;
     private Long povertyScore;
     private Boolean reassess = Boolean.FALSE;
 

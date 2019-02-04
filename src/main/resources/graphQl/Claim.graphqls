@@ -5,6 +5,7 @@ type Claim{
     sales:Sales
     serviceProvider:ServiceProvider
     redeemed:Boolean
+    hasOTP:Boolean
 }
 
 
