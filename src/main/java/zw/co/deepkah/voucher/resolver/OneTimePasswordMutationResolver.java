@@ -40,7 +40,7 @@ public class OneTimePasswordMutationResolver implements GraphQLMutationResolver 
                 , "10",sale.getTenDollarOTP());
         map.add("mobile", PhoneNumberFormatter.formatPhoneNumber(beneficiaryIdentification.getPhoneNumber()));
         map.add("message", message);
-        RestTemplateUtil.postData(map);
+       RestTemplateUtil.postData(map);
 
         return new OneTimePassword(sale.getTenDollarOTP(),sale.getId());
     }
@@ -59,9 +59,10 @@ public class OneTimePasswordMutationResolver implements GraphQLMutationResolver 
                     , "20",sale.getTwentyDollarOTP());
             map.add("mobile", PhoneNumberFormatter.formatPhoneNumber(beneficiaryIdentification.getPhoneNumber()));
             map.add("message", message);
-            RestTemplateUtil.postData(map);
+           RestTemplateUtil.postData(map);
 
         }
-        return new OneTimePassword(sale.getTenDollarOTP(),sale.getId());
+
+        return new OneTimePassword(sale.getTwentyDollarOTP(),sale.getId());
     }
 }

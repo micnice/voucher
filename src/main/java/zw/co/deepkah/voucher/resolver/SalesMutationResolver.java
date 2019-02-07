@@ -44,6 +44,7 @@ public class SalesMutationResolver implements GraphQLMutationResolver {
                 String message = TextMessageUtil.getVoucherSaleNotificationMessage(bi.getFirstName() + " " + bi.getLastName(),bi.getEdd());
                 map.add("mobile", PhoneNumberFormatter.formatPhoneNumber(bi.getPhoneNumber()));
                 map.add("message", message);
+               //
                 RestTemplateUtil.postData(map);
             }
         }catch (Exception e){

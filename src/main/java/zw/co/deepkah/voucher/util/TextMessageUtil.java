@@ -38,7 +38,7 @@ public class TextMessageUtil {
     public static String getVoucherSaleNotificationMessage(String fullName, String edd){
 
         LocalDate eddLocalDate = getLocalDateFromString(edd);
-        String message = "Dear "+fullName+" Please go to the nearest clinic and book for Antenatal Care Services within 3 days. Your Expected Date Of Delivery" +
+        String message = "Dear "+fullName+" Please go to the nearest clinic and book for ANC within 3 days. Your Expected Date Of Delivery" +
                 "(EDD) is on "+getFormmatedLocalDate(eddLocalDate);
 
         return message;
@@ -84,8 +84,8 @@ public class TextMessageUtil {
 
     public static String getOTP(String fullName,String voucherAmount,String password){
 
-       String message ="Dear "+fullName+ " password for the claiming of the $"+voucherAmount+" voucher is:"+password+". Please show " +
-               "this message to the person attending to you and get your $"+voucherAmount+" before you leave this place.";
+       String message ="Dear "+fullName+ " code for your $"+voucherAmount+" voucher is:"+password+". Show " +
+               "code to person attending to you and get $"+voucherAmount+" voucher before going away.";
 
        return message;
     }

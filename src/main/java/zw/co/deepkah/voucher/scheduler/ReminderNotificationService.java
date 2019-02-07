@@ -30,13 +30,11 @@ public class ReminderNotificationService {
     BeneficiaryIdentificationService bis;
 
    // @Scheduled(fixedDelay = 7200000)
-   @Scheduled(fixedDelay = 120000)
+   @Scheduled(fixedDelay = 60000)
     private void sendANCVisitReminder(){
         try {
 
             for(Sales sales:salesService.findAll().get()){
-                System.out.println("$$$$$--ANC1"+sales.getAncVisitOneDate()+"-"+sales.getAnc1Notified());
-                System.out.println("$$$$$--ANC2"+sales.getAncVisitTwoDate());
                 BeneficiaryIdentification bi = bis.getOne(sales.getBeneficiaryIdentityId()).get();
                 LocalDate today = LocalDate.now();
                 if(bi!=null && bi.getPhoneNumber()!=null){
@@ -49,7 +47,6 @@ public class ReminderNotificationService {
                       //TODO LIVE LIVE
                      // LocalDate expectedDateOfVisit =DateFormatter.expectedDateOfVisit(today,28-numberOfDays);
                       LocalDate expectedDateOfVisit =DateFormatter.expectedDateOfVisit(today,3);
-                      System.out.println("&&&&&&&&&--ANCVISITONE-"+sales.getAncVisitOneDate());
                      // if(numberOfDays>=25){
                        if(numberOfDays==0){
                           MultiValueMap<String, String> map = TextMessageUtil.getTxtMessageUtils();
@@ -60,7 +57,7 @@ public class ReminderNotificationService {
                                   ,3);
                           map.add("mobile", PhoneNumberFormatter.formatPhoneNumber(bi.getPhoneNumber()));
                           map.add("message", message);
-                          RestTemplateUtil.postData(map);
+                         RestTemplateUtil.postData(map);
 
                           sales.setAnc2Notified(Boolean.TRUE);
                           salesService.save(sales);
