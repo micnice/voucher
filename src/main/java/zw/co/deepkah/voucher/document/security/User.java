@@ -14,7 +14,7 @@ public class User extends BaseId {
     private String firstName;
     private String lastName;
     private String email;
-    private Set<Role> roleSet;
+    private Set<Roles> rolesSet;
 
 
 

@@ -1,0 +1,13 @@
+enum Roles{
+    ADMINISTRATOR,
+    BENEFICIARY_IDENTIFIER,
+    BENEFICIARY_ASSESSOR,
+    CLAIMS_ASSESSOR,
+    MANAGEMENT,
+    DATA_ENTRY_CLERK,
+    INSTITUTION_MANAGER
+}
+extend type Query {
+rolesList:[Roles]
+}
+

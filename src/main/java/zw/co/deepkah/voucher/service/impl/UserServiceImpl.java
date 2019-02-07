@@ -1,25 +1,27 @@
 package zw.co.deepkah.voucher.service.impl;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import zw.co.deepkah.voucher.document.security.Role;
+import zw.co.deepkah.voucher.configuration.JwtTokenProvider;
 import zw.co.deepkah.voucher.document.security.User;
+import zw.co.deepkah.voucher.exception.CustomException;
 import zw.co.deepkah.voucher.repository.UserRepository;
 import zw.co.deepkah.voucher.service.UserService;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 @Service
 public class UserServiceImpl implements UserService,UserDetailsService {
@@ -27,6 +29,34 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     private UserRepository userRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    public String signin(String username, String password) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            return jwtTokenProvider.createToken(username, new ArrayList<>(userRepository.findByUsername(username).getRolesSet()));
+        } catch (AuthenticationException e) {
+            throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+    }
+
+    @Override
+    public String saveUser(User user) {
+        if (!userRepository.existsByUsername(user.getUsername())) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+            return jwtTokenProvider.createToken(user.getUsername(),new ArrayList<>(user.getRolesSet()) );
+        } else {
+            throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+    }
 
     @Override
     public Optional<List<User>> findAll() {
@@ -52,25 +82,32 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 
     @Override
     public User save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
-    }
+        if(!existsByUsername(user.getUsername())){
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+           return   userRepository.save(user);
+        }else
+            throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
 
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("Invalid username or password.");
-        }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),mapRolesToAuthorities(user.getRoleSet()));
-    }
+        final User user = userRepository.findByUsername(username);
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles) {
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toList());
+        if (user == null) {
+            throw new UsernameNotFoundException("User '" + username + "' not found");
+        }
+
+        return org.springframework.security.core.userdetails.User//
+                .withUsername(username)//
+                .password(user.getPassword())//
+                .authorities(user.getRolesSet())//
+                .accountExpired(false)//
+                .accountLocked(false)//
+                .credentialsExpired(false)//
+                .disabled(false)//
+                .build();
     }
 
     @Override
@@ -86,5 +123,15 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     @Override
     public User findByEmailOrUsername(String email, String username) {
         return userRepository.findByEmailOrUsername(email,username);
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 }

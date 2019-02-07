@@ -1,7 +1,7 @@
 package zw.co.deepkah.voucher.dto;
 
 import lombok.Data;
-import zw.co.deepkah.voucher.document.security.Role;
+import zw.co.deepkah.voucher.document.security.Roles;
 
 import java.util.Set;
 
@@ -15,7 +15,7 @@ public class UserDto {
     private String lastName;
     private String email;
     private boolean isAccountNonExpired;
-    private Set<Role> roleSet;
+    private Set<Roles> roleSet;
 
 
 }
