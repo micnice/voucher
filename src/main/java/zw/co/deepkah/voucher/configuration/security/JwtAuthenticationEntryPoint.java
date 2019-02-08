@@ -1,7 +1,4 @@
-/**
- * 
- */
-package zw.co.deepkah.voucher.configuration;
+package zw.co.deepkah.voucher.configuration.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -12,16 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    @Override
+    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
 
-	
-
-	@Override
-	public void commence(HttpServletRequest arg0, HttpServletResponse arg1, AuthenticationException arg2)
-			throws IOException, ServletException {
-		arg1.sendError(HttpServletResponse.SC_UNAUTHORIZED,"UNAUTHARIZED");
-		
-	}
+        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "UNAUTHORIZED");
+    }
 }
