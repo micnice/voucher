@@ -1,9 +1,9 @@
-package com.techprimers.security.jwtsecurity.security;
+package zw.co.deepkah.voucher.configuration.security;
 
-import com.techprimers.security.jwtsecurity.model.JwtAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import zw.co.deepkah.voucher.document.security.JwtAuthenticationToken;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -14,6 +14,7 @@ import java.io.IOException;
 public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessingFilter {
 
     public JwtAuthenticationTokenFilter() {
+
         super("/rest/**");
     }
 
