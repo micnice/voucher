@@ -10,9 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import zw.co.deepkah.voucher.configuration.JwtTokenProvider;
 import zw.co.deepkah.voucher.document.security.User;
 import zw.co.deepkah.voucher.exception.CustomException;
 import zw.co.deepkah.voucher.repository.UserRepository;
@@ -30,33 +28,6 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
-
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    public String signin(String username, String password) {
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-            return jwtTokenProvider.createToken(username, new ArrayList<>(userRepository.findByUsername(username).getRolesSet()));
-        } catch (AuthenticationException e) {
-            throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
-        }
-    }
-
-    @Override
-    public String saveUser(User user) {
-        if (!userRepository.existsByUsername(user.getUsername())) {
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
-            return jwtTokenProvider.createToken(user.getUsername(),new ArrayList<>(user.getRolesSet()) );
-        } else {
-            throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
-        }
-    }
 
     @Override
     public Optional<List<User>> findAll() {
@@ -84,7 +55,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     public User save(User user) {
         if(!existsByUsername(user.getUsername())){
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-           return   userRepository.save(user);
+           return userRepository.save(user);
         }else
             throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
@@ -92,15 +63,15 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        final User user = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+        final User user = userRepository.findByEmailOrUsername(usernameOrEmail,usernameOrEmail);
 
         if (user == null) {
-            throw new UsernameNotFoundException("User '" + username + "' not found");
+            throw new UsernameNotFoundException("User '" + usernameOrEmail + "' not found");
         }
 
         return org.springframework.security.core.userdetails.User//
-                .withUsername(username)//
+                .withUsername(usernameOrEmail)//
                 .password(user.getPassword())//
                 .authorities(user.getRolesSet())//
                 .accountExpired(false)//
@@ -108,6 +79,11 @@ public class UserServiceImpl implements UserService,UserDetailsService {
                 .credentialsExpired(false)//
                 .disabled(false)//
                 .build();
+    }
+
+    @Override
+    public boolean existsByEmailOrUsername(String email, String username) {
+        return userRepository.existsByEmailOrUsername(email,username);
     }
 
     @Override
