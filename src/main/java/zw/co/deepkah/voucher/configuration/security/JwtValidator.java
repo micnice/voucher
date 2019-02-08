@@ -1,35 +1,38 @@
-package com.techprimers.security.jwtsecurity.security;
+package zw.co.deepkah.voucher.configuration.security;
 
-import com.techprimers.security.jwtsecurity.model.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Component;
+import zw.co.deepkah.voucher.document.security.Roles;
+import zw.co.deepkah.voucher.document.security.User;
+
+import java.util.Set;
 
 @Component
 public class JwtValidator {
 
 
-    private String secret = "youtube";
+    private String secret = "vms@20!8@#";
 
-    public JwtUser validate(String token) {
+    public User validate(String token) {
 
-        JwtUser jwtUser = null;
+        User user = null;
         try {
             Claims body = Jwts.parser()
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
 
-            jwtUser = new JwtUser();
+            user = new User();
 
-            jwtUser.setUserName(body.getSubject());
-            jwtUser.setId(Long.parseLong((String) body.get("userId")));
-            jwtUser.setRole((String) body.get("role"));
+            user.setUsername(body.getSubject());
+            user.setId(String.valueOf(body.get("userId")));
+            user.setRolesSet((Set<Roles>) body.get("role"));
         }
         catch (Exception e) {
             System.out.println(e);
         }
 
-        return jwtUser;
+        return user;
     }
 }

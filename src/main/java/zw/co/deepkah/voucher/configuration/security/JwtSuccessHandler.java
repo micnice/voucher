@@ -1,4 +1,4 @@
-package com.techprimers.security.jwtsecurity.security;
+package zw.co.deepkah.voucher.configuration.security;
 
 
 import org.springframework.security.core.Authentication;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtSuccessHandler implements AuthenticationSuccessHandler{
+public class JwtSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         System.out.println("Successfully Authentication");

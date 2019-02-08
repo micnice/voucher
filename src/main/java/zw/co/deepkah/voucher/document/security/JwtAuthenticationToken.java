@@ -1,8 +1,8 @@
-package com.techprimers.security.jwtsecurity.model;
+package zw.co.deepkah.voucher.document.security;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken{
+public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken {
 
     private String token;
 
