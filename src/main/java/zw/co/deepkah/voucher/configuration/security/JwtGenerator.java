@@ -1,27 +1,27 @@
-package com.techprimers.security.jwtsecurity.security;
+package zw.co.deepkah.voucher.configuration.security;
 
-import com.techprimers.security.jwtsecurity.model.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
+import zw.co.deepkah.voucher.document.security.User;
 
 @Component
 public class JwtGenerator {
 
 
-    public String generate(JwtUser jwtUser) {
+    public String generate(User user) {
 
 
         Claims claims = Jwts.claims()
-                .setSubject(jwtUser.getUserName());
-        claims.put("userId", String.valueOf(jwtUser.getId()));
-        claims.put("role", jwtUser.getRole());
+                .setSubject(user.getUsername());
+        claims.put("userId", String.valueOf(user.getId()));
+        claims.put("role", user.getRolesSet());
 
 
         return Jwts.builder()
                 .setClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, "youtube")
+                .signWith(SignatureAlgorithm.HS512, "vms@20!8@#")
                 .compact();
     }
 }
