@@ -46,9 +46,11 @@ dependencies {
 	compile group: 'org.springframework.batch', name: 'spring-batch-core', version: '4.1.0.RELEASE'
 	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.1'
 	compile group: 'org.apache.poi', name: 'poi', version: '4.0.1'
+	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 
 
-    runtimeOnly('org.springframework.boot:spring-boot-devtools')
+
+	runtimeOnly('org.springframework.boot:spring-boot-devtools')
 	compileOnly('org.projectlombok:lombok')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
  	testImplementation('org.springframework.security:spring-security-test')

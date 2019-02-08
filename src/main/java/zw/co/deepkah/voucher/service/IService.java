@@ -20,6 +20,8 @@ public interface IService<T> {
             T t = null;
             return t;
         };
+
+
         void removeById(String Id);
         void remove(T t);
         T save(T t);
