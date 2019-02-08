@@ -11,9 +11,9 @@ public interface UserService extends IService<User> {
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
 
-    UserDetails loadUserByUsername(String username);
-    String signin(String username, String password);
 
-    String saveUser(User user);
+
+    boolean existsByEmailOrUsername(String email,String username);
+
 
 }
