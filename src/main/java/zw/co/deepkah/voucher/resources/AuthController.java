@@ -1,17 +1,9 @@
-package com.example.polls.controller;
+package zw.co.deepkah.voucher.resources;
 
-import com.example.polls.exception.AppException;
-import com.example.polls.model.Role;
-import com.example.polls.model.RoleName;
-import com.example.polls.model.User;
-import com.example.polls.payload.ApiResponse;
-import com.example.polls.payload.JwtAuthenticationResponse;
-import com.example.polls.payload.LoginRequest;
-import com.example.polls.payload.SignUpRequest;
-import com.example.polls.repository.RoleRepository;
-import com.example.polls.repository.UserRepository;
-import com.example.polls.security.JwtTokenProvider;
+
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,44 +15,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
+import zw.co.deepkah.voucher.configuration.security.JwtAuthenticationProvider;
+import zw.co.deepkah.voucher.document.security.User;
+import zw.co.deepkah.voucher.payload.ApiResponse;
+import zw.co.deepkah.voucher.payload.JwtAuthenticationResponse;
+import zw.co.deepkah.voucher.payload.LoginRequest;
+import zw.co.deepkah.voucher.payload.SignUpRequest;
+import zw.co.deepkah.voucher.repository.RoleRepository;
+import zw.co.deepkah.voucher.service.UserService;
 import javax.validation.Valid;
-import java.net.URI;
-import java.util.Collections;
 
-/**
- * Created by rajeevkumarsingh on 02/08/17.
- */
+
+
 @RestController
 @RequestMapping("/api/auth")
+@AllArgsConstructor
 public class AuthController {
 
-    @Autowired
     AuthenticationManager authenticationManager;
 
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
+    UserService  userService;
     RoleRepository roleRepository;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    JwtTokenProvider tokenProvider;
+    JwtAuthenticationProvider tokenProvider;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsernameOrEmail(),
-                        loginRequest.getPassword()
-                )
-        );
-
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                 loginRequest.getUsernameOrEmail(),loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.generateToken(authentication);
@@ -69,33 +51,19 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
-                    HttpStatus.BAD_REQUEST);
-        }
-
-        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
+        if(userService.existsByEmailOrUsername(signUpRequest.getUsername(),signUpRequest.getEmail())) {
+            return new ResponseEntity(new ApiResponse(false, "Username or Email is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
 
         // Creating user's account
-        User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(), signUpRequest.getPassword());
+        User user = new User(signUpRequest.getUsername(),signUpRequest.getPassword(),signUpRequest.getFirstName(),signUpRequest.getLastName(),
+                signUpRequest.getEmail(), signUpRequest.getRolesSet());
+        User result = userService.save(user);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Success registration", String.valueOf(new ApiResponse(true, "User registered successfully")));
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-                .orElseThrow(() -> new AppException("User Role not set."));
-
-        user.setRoles(Collections.singleton(userRole));
-
-        User result = userRepository.save(user);
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/users/{username}")
-                .buildAndExpand(result.getUsername()).toUri();
-
-        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+        return new ResponseEntity(result,httpHeaders,HttpStatus.OK);
     }
 }
