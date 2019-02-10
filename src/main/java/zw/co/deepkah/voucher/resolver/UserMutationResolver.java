@@ -22,7 +22,7 @@ public class UserMutationResolver implements GraphQLMutationResolver {
         user.setLastName(userDto.getLastName());
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
-        user.setRolesSet(userDto.getRoleSet());
+        user.setRoleSet(userDto.getRoleSet());
         user.setUsername(userDto.getUsername());
         return userService.save(user);
        }
@@ -35,7 +35,7 @@ public class UserMutationResolver implements GraphQLMutationResolver {
             user.setLastName(userDto.getLastName());
             user.setPassword(userDto.getPassword());
             user.setEmail(userDto.getEmail());
-            user.setRolesSet(userDto.getRoleSet());
+            user.setRoleSet(userDto.getRoleSet());
             user.setUsername(userDto.getUsername());
         }
 
