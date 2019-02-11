@@ -3,31 +3,23 @@ package zw.co.deepkah.voucher.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import zw.co.deepkah.voucher.document.security.User;
-import zw.co.deepkah.voucher.exception.CustomException;
+
 import zw.co.deepkah.voucher.repository.UserRepository;
 import zw.co.deepkah.voucher.service.UserService;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
 @Service
-public class UserServiceImpl implements UserService,UserDetailsService {
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
 
     @Override
     public Optional<List<User>> findAll() {
@@ -53,33 +45,19 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 
     @Override
     public User save(User user) {
-        if(!existsByUsername(user.getUsername())){
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        if(!existsByEmailOrUsername(user.getUsername(),user.getEmail())){
            return userRepository.save(user);
-        }else
-            throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+        } else try {
+            throw new Exception("Duplicate value");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-
-
-    @Override
-    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
-        final User user = userRepository.findByEmailOrUsername(usernameOrEmail,usernameOrEmail);
-
-        if (user == null) {
-            throw new UsernameNotFoundException("User '" + usernameOrEmail + "' not found");
-        }
-
-        return org.springframework.security.core.userdetails.User//
-                .withUsername(usernameOrEmail)//
-                .password(user.getPassword())//
-                .authorities(user.getRolesSet())//
-                .accountExpired(false)//
-                .accountLocked(false)//
-                .credentialsExpired(false)//
-                .disabled(false)//
-                .build();
+        return user;
     }
+
+
+
+
 
     @Override
     public boolean existsByEmailOrUsername(String email, String username) {
