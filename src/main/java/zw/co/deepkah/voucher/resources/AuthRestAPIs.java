@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import zw.co.deepkah.voucher.configuration.security.jwt.JwtProvider;
 import zw.co.deepkah.voucher.document.security.Role;
 import zw.co.deepkah.voucher.document.security.User;
+import zw.co.deepkah.voucher.dto.UserResponseDTO;
 import zw.co.deepkah.voucher.message.request.LoginForm;
 import zw.co.deepkah.voucher.message.request.SignUpForm;
 import zw.co.deepkah.voucher.message.response.JwtResponse;
