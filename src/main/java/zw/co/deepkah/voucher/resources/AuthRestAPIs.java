@@ -7,21 +7,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import zw.co.deepkah.voucher.configuration.security.jwt.JwtProvider;
 import zw.co.deepkah.voucher.document.security.Role;
 import zw.co.deepkah.voucher.document.security.User;
-import zw.co.deepkah.voucher.dto.UserResponseDTO;
 import zw.co.deepkah.voucher.message.request.LoginForm;
 import zw.co.deepkah.voucher.message.request.SignUpForm;
 import zw.co.deepkah.voucher.message.response.JwtResponse;
+import zw.co.deepkah.voucher.message.response.UserDtoResponse;
 import zw.co.deepkah.voucher.repository.RoleRepository;
 import zw.co.deepkah.voucher.repository.UserRepository;
 
 import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -46,7 +48,7 @@ public class AuthRestAPIs {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
-
+        UserDtoResponse userDtoResponse = new UserDtoResponse();
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
@@ -54,10 +56,14 @@ public class AuthRestAPIs {
                 )
         );
 
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateJwtToken(authentication);
-        return ResponseEntity.ok(new JwtResponse(jwt));
+        userDtoResponse.setToken(jwt);
+        userDtoResponse.setUsername(loginRequest.getUsername());
+        userDtoResponse.setRoleSet((List<GrantedAuthority>) authentication.getAuthorities());
+        return ResponseEntity.ok(userDtoResponse);
     }
 
     @PostMapping("/signup")
