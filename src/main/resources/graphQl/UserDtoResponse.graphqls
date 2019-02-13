@@ -1,0 +1,10 @@
+type SignInDto{
+username:String
+roleSet: [Role]
+token: String
+type: String
+}
+
+extend type Mutation {
+   signin(username:String,password:String):SignInDto
+   }
