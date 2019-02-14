@@ -101,7 +101,6 @@ public class BeneficiaryIdentificationUploadResource {
         beneficiaryIdentification.setCreatedBy(beneficiaryIdentificationDto.getDataCollectedBy());
         beneficiaryIdentification.setDateCreated(beneficiaryIdentificationDto.getDateIdentified());
 
-
         if (beneficiaryIdentificationDto.getMaritalStatusDto().equalsIgnoreCase(MaritalStatus.DIVORCED.toString()))
             beneficiaryIdentification.setMaritalStatus(MaritalStatus.DIVORCED);
         else if (beneficiaryIdentificationDto.getMaritalStatusDto().equalsIgnoreCase(MaritalStatus.MARRIED.toString()))
