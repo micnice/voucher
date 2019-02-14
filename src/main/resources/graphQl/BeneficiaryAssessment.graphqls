@@ -5,6 +5,7 @@ type BeneficiaryAssessment{
       povertyScore:Long
       latitude:String
       longitude:String
+      assessedBy: String
 
 }
 extend type Query {
@@ -21,6 +22,7 @@ input BeneficiaryAssessmentInput{
     povertyScore:Long
     latitude:String
     longitude:String
+    assessedBy: String
 }
 
 extend type Mutation {

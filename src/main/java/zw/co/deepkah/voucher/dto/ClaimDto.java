@@ -12,4 +12,5 @@ public class ClaimDto {
     private String beneficiaryIdentification;
     private String voucherType;
     private String sales;
+    private String processedBy;
 }

@@ -69,6 +69,7 @@ public class PovertyBeneficiaryAssessmentToolMutationResolver implements GraphQL
         beneficiaryAssessment.setPovertyScore(povertyAssessmentTool.getTrueCount());
         beneficiaryAssessment.setPregnancyStatus(povertyBeneficiaryAssessmentTool.getPregnancyStatus());
         beneficiaryAssessment.setBeneficiaryIdentityId(povertyBeneficiaryAssessmentTool.getBeneficiaryIdentityId());
+        beneficiaryAssessment.setAssessedBy(povertyBeneficiaryAssessmentTool.getAssessedBy());
 
         boolean beneficiaryIdentityExists = beneficiaryAssessmentService.existsByBeneficiaryIdentityId(beneficiaryAssessment.getBeneficiaryIdentityId());
         if(!beneficiaryIdentityExists){

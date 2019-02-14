@@ -23,7 +23,7 @@ public class BeneficiaryIdentificationDto {
     private String phoneNumber;
     private String address;
     private LocalDate dateIdentified;
-    private String IdentifiedBy;
+    private String dataCollectedBy;
     private String pregnancyStatus;
     private String dataCollectionDate;
     private String ga;

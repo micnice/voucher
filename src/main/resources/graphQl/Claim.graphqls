@@ -6,6 +6,7 @@ type Claim{
     serviceProvider:ServiceProvider
     redeemed:Boolean
     hasOTP:Boolean
+    processedBy: String
 }
 
 
@@ -20,11 +21,12 @@ input ClaimInput{
     voucherType:ID
     sales:ID
     serviceProvider:ID
+    processedBy:String
 
 }
 extend type Mutation{
     createClaim(claimInput:ClaimInput):Claim
     updateClaim(claimInput:ClaimInput,id:ID):Claim
-    redeemClaim(serviceProvider:ID,id:ID):Claim
+    redeemClaim(serviceProvider:ID,id:ID,processedBy:String):Claim
 }
 

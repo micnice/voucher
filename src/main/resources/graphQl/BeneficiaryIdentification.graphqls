@@ -14,6 +14,7 @@ type BeneficiaryIdentification{
     edd: String
     phoneNumber:String
     dataCollectionDate:String
+    dataCollectedBy: String
     povertyScore:Long
 }
 extend type Query {
@@ -38,6 +39,7 @@ input BeneficiaryIdentificationInput{
     longitude:String
     dataCollectionDate:String
     phoneNumber:String
+     dataCollectedBy: String
 }
 
 extend type Mutation {

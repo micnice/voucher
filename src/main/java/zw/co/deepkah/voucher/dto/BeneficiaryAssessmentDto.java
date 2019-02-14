@@ -10,4 +10,5 @@ public class BeneficiaryAssessmentDto {
     private Long povertyScore;
     private String latitude;
     private String longitude;
+    private String assessedBy;
 }

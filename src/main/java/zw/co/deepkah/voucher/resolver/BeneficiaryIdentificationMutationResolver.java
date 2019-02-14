@@ -32,6 +32,7 @@ public class BeneficiaryIdentificationMutationResolver implements GraphQLMutatio
         beneficiaryIdentification.setPhoneNumber(beneficiaryIdentificationDto.getPhoneNumber());
         beneficiaryIdentification.setDataCollectionDate(beneficiaryIdentificationDto.getDataCollectionDate());
         beneficiaryIdentification.setMaritalStatus(beneficiaryIdentificationDto.getMaritalStatus());
+        beneficiaryIdentification.setDataCollectedBy(beneficiaryIdentificationDto.getDataCollectedBy());
 
        boolean identityNumberExists = beneficiaryIdentificationService.existsByIdentificationNumber(beneficiaryIdentification.getIdentificationNumber());
 

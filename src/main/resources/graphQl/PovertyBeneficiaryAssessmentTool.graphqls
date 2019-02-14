@@ -5,7 +5,8 @@ type PovertyBeneficiaryAssessmentTool{
     povertyScore:Long
     latitude:String
     longitude:String
-    dateAssessed:String;
+    dateAssessed:String
+    assessedBy: String
 #----------------------------------------------------------
     pat1:Boolean
     pat2:Boolean
@@ -28,6 +29,7 @@ input PovertyBeneficiaryAssessmentToolInput{
     latitude:String
     longitude:String
     dateAssessed:String
+    assessedBy: String
     #----------------------------------------------------------
     pat1:Boolean
     pat2:Boolean

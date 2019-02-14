@@ -24,6 +24,7 @@ public class BeneficiaryAssessmentMutationResolver implements GraphQLMutationRes
         beneficiaryAssessment.setLongitude(beneficiaryAssessmentDto.getLongitude());
         beneficiaryAssessment.setPovertyScore(beneficiaryAssessmentDto.getPovertyScore());
         beneficiaryAssessment.setPregnancyStatus(beneficiaryAssessmentDto.getPregnancyStatus());
+        beneficiaryAssessment.setAssessedBy(beneficiaryAssessmentDto.getAssessedBy());
 
         boolean beneficiaryIdentityExist = beneficiaryAssessmentService.existsByBeneficiaryIdentityId(beneficiaryAssessment.getBeneficiaryIdentityId());
         if(!beneficiaryIdentityExist){

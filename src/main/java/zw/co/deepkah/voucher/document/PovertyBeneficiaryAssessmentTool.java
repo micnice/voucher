@@ -11,6 +11,7 @@ public class PovertyBeneficiaryAssessmentTool {
     private String dateAssessed;
     private String latitude;
     private String longitude;
+    private String assessedBy;
     private Boolean pat1;
     private Boolean pat2;
     private Boolean pat3;

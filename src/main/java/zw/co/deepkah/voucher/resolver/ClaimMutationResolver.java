@@ -58,14 +58,14 @@ public class ClaimMutationResolver implements GraphQLMutationResolver {
     }
 
 
-    public Claim redeemClaim(String serviceProviderId,Optional<String> claimId){
+    public Claim redeemClaim(String serviceProviderId,Optional<String> claimId,String processedBy){
 
       Claim claim = new Claim();
        if(claimId.isPresent()) {
            claim = claimService.getOne(claimId.get()).get();
 
-           System.out.println("$$$$$$===I AM HERE="+claim.getVoucherType().getName());
-           if (!claim.getRedeemed()){
+  if (!claim.getRedeemed()){
+               claim.setProcessedBy(processedBy);
                claim.setRedeemed(Boolean.TRUE);
                claim.setRedemptionDate(getFormmatedNormalFormat(LocalDate.now()));
                Sales sale = salesService.getOne(claim.getSales().getId()).get();

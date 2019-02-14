@@ -17,6 +17,7 @@ public class Claim extends BaseId {
             private Sales sales;
             private Boolean redeemed = Boolean.FALSE;
             private String redemptionDate;
+            private String processedBy;
             private Boolean hasOTP = Boolean.FALSE;
 
     public Claim(String id) {

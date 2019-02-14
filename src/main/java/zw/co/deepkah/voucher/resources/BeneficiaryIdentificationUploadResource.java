@@ -81,7 +81,7 @@ public class BeneficiaryIdentificationUploadResource {
                 } else if (currentCell.getCellType() == CellType.STRING) {
                     beneficiaryIdentificationDto.setDateIdentified(LocalDate.parse(currentCell.getStringCellValue()));
                 } else if (currentCell.getCellType() == CellType.STRING) {
-                    beneficiaryIdentificationDto.setIdentifiedBy((currentCell.getStringCellValue()));
+                    beneficiaryIdentificationDto.setDataCollectedBy((currentCell.getStringCellValue()));
                 } else if (currentCell.getCellType() == CellType.STRING) {
                     beneficiaryIdentificationDto.setLatitude((currentCell.getStringCellValue()));
                 } else if (currentCell.getCellType() == CellType.STRING) {
@@ -98,7 +98,7 @@ public class BeneficiaryIdentificationUploadResource {
         beneficiaryIdentification.setLmp(beneficiaryIdentificationDto.getLmp());
         beneficiaryIdentification.setLmp(beneficiaryIdentificationDto.getLmp());
         beneficiaryIdentification.setBirthDate(beneficiaryIdentificationDto.getBirthDate());
-        beneficiaryIdentification.setCreatedBy(beneficiaryIdentificationDto.getIdentifiedBy());
+        beneficiaryIdentification.setCreatedBy(beneficiaryIdentificationDto.getDataCollectedBy());
         beneficiaryIdentification.setDateCreated(beneficiaryIdentificationDto.getDateIdentified());
 
 

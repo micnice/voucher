@@ -26,6 +26,7 @@ public class BeneficiaryIdentification extends BaseId {
     private Boolean isAssessed = Boolean.FALSE;
     private Boolean reAssess = Boolean.FALSE;
     private String dataCollectionDate;
+    private String dataCollectedBy;
     private String edd;
     private String phoneNumber;
     private Long povertyScore;
