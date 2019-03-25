@@ -134,8 +134,9 @@ public class BeneficiaryIdentificationUploadResource {
             beneficiaryAssessment.setPregnancyStatus(PregnancyStatus.YES);
         if (beneficiaryIdentificationDto.getPregnancyStatus().equalsIgnoreCase(PregnancyStatus.NO.toString()))
             beneficiaryAssessment.setPregnancyStatus(PregnancyStatus.NO);
-        if (beneficiaryIdentificationDto.getPregnancyStatus().equalsIgnoreCase(PregnancyStatus.NA.toString()))
+        if (beneficiaryIdentificationDto.getPregnancyStatus().equalsIgnoreCase(PregnancyStatus.NA.toString())) {
             beneficiaryAssessment.setPregnancyStatus(PregnancyStatus.NA);
+        }
         beneficiaryAssessment.setLongitude(beneficiaryIdentificationDto.getLongitude());
         beneficiaryAssessment.setLatitude(beneficiaryIdentificationDto.getLatitude());
         beneficiaryAssessmentService.save(beneficiaryAssessment);
